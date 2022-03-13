@@ -1,0 +1,775 @@
+
+; 64tass Turbo Assembler Macro V1.53.1515 listing file
+; 64tass -a -l target\super8086.lbl -L target\super8086.lst -o target\super8086 src\super8086.asm
+; Sat Mar 12 20:22:44 2022
+
+;Offset	;Hex		;Monitor	;Source
+
+;******  Processing input file: src\super8086.asm
+
+
+;******  Processing file: src\macros.asm
+
+
+;******  Return to file: src\super8086.asm
+
+=$020000				BANK = $020000
+>0801	0b 08 d5 07			    .word (+), 2005
+>0805	9e 32 35 37 35 00		    .null $9e, format("%d",start)
+>080b	00 00				 +  .word 0
+=$42					AX  = $42   ; the accumulator reg
+=$42					AL  = $42
+=$43					AH  = $43
+=$44					BX  = $44   ; the base addr reg
+=$44					BL  = $44
+=$45					BH  = $45
+=$46					CX  = $46   ; the count reg
+=$46					CL  = $46
+=$47					CH  = $47
+=$48					DX  = $48   ; the data reg
+=$48					DL  = $48
+=$49					DH  = $49
+=$4a					CS  = $4a   ; code segment reg
+=$4c					DS  = $4c   ; data segment reg
+=$4e					ES  = $4e   ; extra segment reg
+=$50					SS  = $50   ; stack segment reg
+=$52					IP  = $52   ; instruction pointer
+=$54					FR  = $54   ; flags register
+=$56					SP  = $56   ; stack pointer reg
+=$58					BP  = $58   ; base pointer reg
+=$5a					SI  = $5a   ; source index reg
+=$5c					DI  = $5c   ; destination index reg
+=$5e					TMP1 = $5e
+.080d					JUMPTBL:
+>080d	cd 0a db 0a de 0a e1 0a		    .word j00, j01, j02, j03, j04, j05, j06, j07, j08, j09, j0a, j0b, j0c, j0d, j0e, j0f
+>0815	e4 0a e7 0a ea 0a ed 0a f0 0a f3 0a f6 0a f9 0a
+>0825	fc 0a ff 0a 02 0b 05 0b
+>082d	08 0b 0b 0b 0e 0b 11 0b		    .word j10, j11, j12, j13, j14, j15, j16, j17, j18, j19, j1a, j1b, j1c, j1d, j1e, j1f
+>0835	14 0b 17 0b 1a 0b 1d 0b 20 0b 23 0b 26 0b 29 0b
+>0845	2c 0b 2f 0b 32 0b 35 0b
+>084d	38 0b 3b 0b 3e 0b 41 0b		    .word j20, j21, j22, j23, j24, j25, j26, j27, j28, j29, j2a, j2b, j2c, j2d, j2e, j2f
+>0855	44 0b 47 0b 4a 0b 4d 0b 50 0b 53 0b 56 0b 59 0b
+>0865	5c 0b 5f 0b 62 0b 65 0b
+>086d	68 0b 6b 0b 6e 0b 71 0b		    .word j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j3a, j3b, j3c, j3d, j3e, j3f
+>0875	74 0b 77 0b 7a 0b 7d 0b 80 0b 83 0b 86 0b 89 0b
+>0885	8c 0b 8f 0b 92 0b 95 0b
+>088d	98 0b 9b 0b 9e 0b a1 0b		    .word j40, j41, j42, j43, j44, j45, j46, j47, j48, j49, j4a, j4b, j4c, j4d, j4e, j4f
+>0895	a4 0b a7 0b aa 0b ad 0b b0 0b b3 0b b6 0b b9 0b
+>08a5	bc 0b bf 0b c2 0b c5 0b
+>08ad	c8 0b cb 0b ce 0b d1 0b		    .word j50, j51, j52, j53, j54, j55, j56, j57, j58, j59, j5a, j5b, j5c, j5d, j5e, j5f
+>08b5	d4 0b d7 0b da 0b dd 0b e0 0b e3 0b e6 0b e9 0b
+>08c5	ec 0b ef 0b f2 0b f5 0b
+>08cd	f8 0b fb 0b fe 0b 01 0c		    .word j60, j61, j62, j63, j64, j65, j66, j67, j68, j69, j6a, j6b, j6c, j6d, j6e, j6f
+>08d5	04 0c 07 0c 0a 0c 0d 0c 10 0c 13 0c 16 0c 19 0c
+>08e5	1c 0c 1f 0c 22 0c 25 0c
+>08ed	28 0c 2b 0c 2e 0c 31 0c		    .word j70, j71, j72, j73, j74, j75, j76, j77, j78, j79, j7a, j7b, j7c, j7d, j7e, j7f
+>08f5	34 0c 37 0c 3a 0c 3d 0c 40 0c 43 0c 46 0c 49 0c
+>0905	4c 0c 4f 0c 52 0c 55 0c
+>090d	58 0c 5b 0c 5e 0c 61 0c		    .word j80, j81, j82, j83, j84, j85, j86, j87, j88, j89, j8a, j8b, j8c, j8d, j8e, j8f
+>0915	64 0c 67 0c 6a 0c 6d 0c 70 0c 73 0c 76 0c 79 0c
+>0925	7c 0c 7f 0c 82 0c 85 0c
+>092d	88 0c 8b 0c 8e 0c 91 0c		    .word j90, j91, j92, j93, j94, j95, j96, j97, j98, j99, j9a, j9b, j9c, j9d, j9e, j9f
+>0935	94 0c 97 0c 9a 0c 9d 0c a0 0c a3 0c a6 0c a9 0c
+>0945	ac 0c af 0c b2 0c b5 0c
+>094d	b8 0c bb 0c be 0c c1 0c		    .word ja0, ja1, ja2, ja3, ja4, ja5, ja6, ja7, ja8, ja9, jaa, jab, jac, jad, jae, jaf
+>0955	c4 0c c7 0c ca 0c cd 0c d0 0c d3 0c d6 0c d9 0c
+>0965	dc 0c df 0c e2 0c e5 0c
+>096d	e8 0c eb 0c ee 0c ff 0c		    .word jb0, jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jba, jbb, jbc, jbd, jbe, jbf
+>0975	02 0d 13 0d 16 0d 19 0d 1c 0d 1f 0d 22 0d 25 0d
+>0985	28 0d 2b 0d 2e 0d 31 0d
+>098d	34 0d 37 0d 3a 0d 3d 0d		    .word jc0, jc1, jc2, jc3, jc4, jc5, jc6, jc7, jc8, jc9, jca, jcb, jcc, jcd, jce, jcf
+>0995	40 0d 43 0d 46 0d 49 0d 4c 0d 4f 0d 52 0d 55 0d
+>09a5	58 0d 5b 0d 7d 0d 80 0d
+>09ad	83 0d 86 0d 89 0d 8c 0d		    .word jd0, jd1, jd2, jd3, jd4, jd5, jd6, jd7, jd8, jd9, jda, jdb, jdc, jdd, jde, jdf
+>09b5	8f 0d 92 0d 95 0d 98 0d 9b 0d 9e 0d a1 0d a4 0d
+>09c5	a7 0d aa 0d ad 0d b0 0d
+>09cd	b3 0d b6 0d b9 0d bc 0d		    .word je0, je1, je2, je3, je4, je5, je6, je7, je8, je9, jea, jeb, jec, jed, jee, jef
+>09d5	bf 0d c2 0d c5 0d c8 0d cb 0d ce 0d d1 0d d4 0d
+>09e5	06 0e 09 0e 0c 0e 0f 0e
+>09ed	12 0e 15 0e 18 0e 1b 0e		    .word jf0, jf1, jf2, jf3, jf4, jf5, jf6, jf7, jf8, jf9, jfa, jfb, jfc, jfd, jfe, jff
+>09f5	1e 0e 21 0e 24 0e 27 0e 2a 0e 2d 0e 30 0e 33 0e
+>0a05	36 0e 39 0e 3c 0e 3f 0e
+.0a0d					JUMPADDR:
+>0a0d	00 00				    .word $0000
+.0a0f					start:
+.0a0f	a9 aa		lda #$aa	    lda #<msg1      ; print the startup message
+.0a11	85 fe		sta $fe		    sta $fe
+.0a13	a9 0a		lda #$0a	    lda #>msg1
+.0a15	85 ff		sta $ff		    sta $ff
+.0a17	20 9c 0a	jsr $0a9c	    jsr print
+.0a1a	18		clc		                clc
+.0a1b	fb		xce		                xce
+.0a1c	c2 20		rep #$20	                REP #$20
+.0a1e	a9 00 01	lda #$0100	    lda #$0100
+.0a21	85 52		sta $52		    sta IP
+.0a23	e2 30		sep #$30	                SEP #$30
+.0a25	a0 00		ldy #$00	    ldy #$00
+.0a27					LOAD:
+.0a27	b9 40 0a	lda $0a40,y	    lda X86PRG,y
+.0a2a	48		pha		                pha
+.0a2b	a9 02		lda #$02	                lda #$02
+.0a2d	48		pha		                pha                     ; push the value to the stack
+.0a2e	ab		plb		                plb                     ; pull value from stack to data bank register
+.0a2f	68		pla		                pla
+.0a30	91 52		sta ($52),y	    sta (IP),y
+.0a32	c8		iny		    iny
+.0a33	c0 08		cpy #$08	    cpy #$08
+.0a35	f0 12		beq $0a49	    beq MAINLOOP
+.0a37	48		pha		                pha
+.0a38	a9 00		lda #$00	                lda #$00
+.0a3a	48		pha		                pha                     ; push the value to the stack
+.0a3b	ab		plb		                plb                     ; pull value from stack to data bank register
+.0a3c	68		pla		                pla
+.0a3d	4c 27 0a	jmp $0a27	    jmp LOAD
+.0a40					X86PRG:
+>0a40	b2 58 b4 02 cd 21 eb f8		    .byte $b2, $58, $b4, $02, $cd, $21, $eb, $f8, $00
+>0a48	00
+.0a49					MAINLOOP:
+.0a49	a9 00		lda #$00	    lda #$00
+.0a4b	eb		xba		    xba
+.0a4c	20 93 0a	jsr $0a93	    jsr FETCH_IP
+.0a4f	48		pha		                pha
+.0a50	a9 00		lda #$00	                lda #$00
+.0a52	48		pha		                pha                     ; push the value to the stack
+.0a53	ab		plb		                plb                     ; pull value from stack to data bank register
+.0a54	68		pla		                pla
+.0a55	c2 30		rep #$30	                REP #$30
+.0a57	0a		asl a		    asl
+.0a58	a8		tay		    tay
+.0a59	b9 0d 08	lda $080d,y	    lda JUMPTBL,y
+.0a5c	8d 0d 0a	sta $0a0d	    sta JUMPADDR
+.0a5f	e2 30		sep #$30	                SEP #$30
+.0a61	6c 0d 0a	jmp ($0a0d)	    jmp (JUMPADDR)
+.0a64					MAINLOOP_END:
+.0a64	20 80 0a	jsr $0a80	    jsr INC_IP
+.0a67	4c 49 0a	jmp $0a49	    jmp MAINLOOP
+.0a6a					EXIT:
+.0a6a	e2 30		sep #$30	                SEP #$30
+.0a6c	48		pha		                pha
+.0a6d	a9 00		lda #$00	                lda #$00
+.0a6f	48		pha		                pha                     ; push the value to the stack
+.0a70	ab		plb		                plb                     ; pull value from stack to data bank register
+.0a71	68		pla		                pla
+.0a72	a9 c0		lda #$c0	    lda #<msg2      ; print the startup message
+.0a74	85 fe		sta $fe		    sta $fe
+.0a76	a9 0a		lda #$0a	    lda #>msg2
+.0a78	85 ff		sta $ff		    sta $ff
+.0a7a	20 9c 0a	jsr $0a9c	    jsr print
+.0a7d	38		sec		                sec
+.0a7e	fb		xce		                xce
+.0a7f	60		rts		    rts
+.0a80					INC_IP:
+.0a80	48		pha		                pha
+.0a81	a9 00		lda #$00	                lda #$00
+.0a83	48		pha		                pha                     ; push the value to the stack
+.0a84	ab		plb		                plb                     ; pull value from stack to data bank register
+.0a85	68		pla		                pla
+.0a86	c2 20		rep #$20	                REP #$20
+.0a88	a5 52		lda $52		    lda IP
+.0a8a	18		clc		    clc
+.0a8b	69 01 00	adc #$0001	    adc #$01
+.0a8e	85 52		sta $52		    sta IP      ; increment IP
+.0a90	e2 20		sep #$20	                SEP #$20
+.0a92	60		rts		    rts
+.0a93					FETCH_IP:
+.0a93	48		pha		                pha
+.0a94	a9 02		lda #$02	                lda #$02
+.0a96	48		pha		                pha                     ; push the value to the stack
+.0a97	ab		plb		                plb                     ; pull value from stack to data bank register
+.0a98	68		pla		                pla
+.0a99	b2 52		lda ($52)	    lda (IP)    ; get next value
+.0a9b	60		rts		    rts
+.0a9c					print:
+.0a9c	a0 00		ldy #$00	    ldy #$00
+.0a9e					nextch:
+.0a9e	b1 fe		lda ($fe),y	    lda ($fe),y
+.0aa0	f0 07		beq $0aa9	    beq +
+.0aa2	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0aa5	c8		iny		    iny
+.0aa6	4c 9e 0a	jmp $0a9e	    jmp nextch
+.0aa9	60		rts		+   rts
+.0aaa					msg1:
+>0aaa	93 0e d3 55 50 45 52 38		    .text $93,$0e,"Super8086 Emulator",$0d,$00
+>0ab2	30 38 36 20 c5 4d 55 4c 41 54 4f 52 0d 00
+.0ac0					msg2:
+>0ac0	0d d4 45 52 4d 49 4e 41		    .text $0d,"Terminated",$0d,$00
+>0ac8	54 45 44 0d 00
+.0acd					j00:
+.0acd	a9 c0		lda #$c0	    lda #<msg2      ; print the startup message
+.0acf	85 fe		sta $fe		    sta $fe
+.0ad1	a9 0a		lda #$0a	    lda #>msg2
+.0ad3	85 ff		sta $ff		    sta $ff
+.0ad5	20 9c 0a	jsr $0a9c	    jsr print
+.0ad8	4c 6a 0a	jmp $0a6a	+   jmp EXIT
+.0adb					j01:
+.0adb	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ade					j02:
+.0ade	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ae1					j03:
+.0ae1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ae4					j04:
+.0ae4	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ae7					j05:
+.0ae7	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0aea					j06:
+.0aea	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0aed					j07:
+.0aed	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0af0					j08:
+.0af0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0af3					j09:
+.0af3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0af6					j0a:
+.0af6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0af9					j0b:
+.0af9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0afc					j0c:
+.0afc	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0aff					j0d:
+.0aff	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b02					j0e:
+.0b02	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b05					j0f:
+.0b05	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b08					j10:
+.0b08	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b0b					j11:
+.0b0b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b0e					j12:
+.0b0e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b11					j13:
+.0b11	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b14					j14:
+.0b14	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b17					j15:
+.0b17	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b1a					j16:
+.0b1a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b1d					j17:
+.0b1d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b20					j18:
+.0b20	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b23					j19:
+.0b23	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b26					j1a:
+.0b26	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b29					j1b:
+.0b29	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b2c					j1c:
+.0b2c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b2f					j1d:
+.0b2f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b32					j1e:
+.0b32	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b35					j1f:
+.0b35	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b38					j20:
+.0b38	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b3b					j21:
+.0b3b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b3e					j22:
+.0b3e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b41					j23:
+.0b41	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b44					j24:
+.0b44	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b47					j25:
+.0b47	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b4a					j26:
+.0b4a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b4d					j27:
+.0b4d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b50					j28:
+.0b50	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b53					j29:
+.0b53	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b56					j2a:
+.0b56	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b59					j2b:
+.0b59	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b5c					j2c:
+.0b5c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b5f					j2d:
+.0b5f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b62					j2e:
+.0b62	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b65					j2f:
+.0b65	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b68					j30:
+.0b68	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b6b					j31:
+.0b6b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b6e					j32:
+.0b6e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b71					j33:
+.0b71	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b74					j34:
+.0b74	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b77					j35:
+.0b77	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b7a					j36:
+.0b7a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b7d					j37:
+.0b7d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b80					j38:
+.0b80	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b83					j39:
+.0b83	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b86					j3a:
+.0b86	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b89					j3b:
+.0b89	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b8c					j3c:
+.0b8c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b8f					j3d:
+.0b8f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b92					j3e:
+.0b92	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b95					j3f:
+.0b95	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b98					j40:
+.0b98	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b9b					j41:
+.0b9b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0b9e					j42:
+.0b9e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ba1					j43:
+.0ba1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ba4					j44:
+.0ba4	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ba7					j45:
+.0ba7	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0baa					j46:
+.0baa	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bad					j47:
+.0bad	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bb0					j48:
+.0bb0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bb3					j49:
+.0bb3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bb6					j4a:
+.0bb6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bb9					j4b:
+.0bb9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bbc					j4c:
+.0bbc	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bbf					j4d:
+.0bbf	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bc2					j4e:
+.0bc2	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bc5					j4f:
+.0bc5	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bc8					j50:
+.0bc8	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bcb					j51:
+.0bcb	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bce					j52:
+.0bce	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bd1					j53:
+.0bd1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bd4					j54:
+.0bd4	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bd7					j55:
+.0bd7	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bda					j56:
+.0bda	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bdd					j57:
+.0bdd	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0be0					j58:
+.0be0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0be3					j59:
+.0be3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0be6					j5a:
+.0be6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0be9					j5b:
+.0be9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bec					j5c:
+.0bec	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bef					j5d:
+.0bef	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bf2					j5e:
+.0bf2	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bf5					j5f:
+.0bf5	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bf8					j60:
+.0bf8	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bfb					j61:
+.0bfb	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0bfe					j62:
+.0bfe	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c01					j63:
+.0c01	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c04					j64:
+.0c04	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c07					j65:
+.0c07	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c0a					j66:
+.0c0a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c0d					j67:
+.0c0d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c10					j68:
+.0c10	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c13					j69:
+.0c13	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c16					j6a:
+.0c16	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c19					j6b:
+.0c19	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c1c					j6c:
+.0c1c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c1f					j6d:
+.0c1f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c22					j6e:
+.0c22	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c25					j6f:
+.0c25	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c28					j70:
+.0c28	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c2b					j71:
+.0c2b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c2e					j72:
+.0c2e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c31					j73:
+.0c31	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c34					j74:
+.0c34	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c37					j75:
+.0c37	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c3a					j76:
+.0c3a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c3d					j77:
+.0c3d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c40					j78:
+.0c40	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c43					j79:
+.0c43	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c46					j7a:
+.0c46	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c49					j7b:
+.0c49	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c4c					j7c:
+.0c4c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c4f					j7d:
+.0c4f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c52					j7e:
+.0c52	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c55					j7f:
+.0c55	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c58					j80:
+.0c58	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c5b					j81:
+.0c5b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c5e					j82:
+.0c5e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c61					j83:
+.0c61	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c64					j84:
+.0c64	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c67					j85:
+.0c67	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c6a					j86:
+.0c6a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c6d					j87:
+.0c6d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c70					j88:
+.0c70	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c73					j89:
+.0c73	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c76					j8a:
+.0c76	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c79					j8b:
+.0c79	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c7c					j8c:
+.0c7c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c7f					j8d:
+.0c7f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c82					j8e:
+.0c82	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c85					j8f:
+.0c85	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c88					j90:
+.0c88	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c8b					j91:
+.0c8b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c8e					j92:
+.0c8e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c91					j93:
+.0c91	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c94					j94:
+.0c94	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c97					j95:
+.0c97	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c9a					j96:
+.0c9a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0c9d					j97:
+.0c9d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ca0					j98:
+.0ca0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ca3					j99:
+.0ca3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ca6					j9a:
+.0ca6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ca9					j9b:
+.0ca9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cac					j9c:
+.0cac	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0caf					j9d:
+.0caf	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cb2					j9e:
+.0cb2	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cb5					j9f:
+.0cb5	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cb8					ja0:
+.0cb8	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cbb					ja1:
+.0cbb	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cbe					ja2:
+.0cbe	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cc1					ja3:
+.0cc1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cc4					ja4:
+.0cc4	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cc7					ja5:
+.0cc7	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cca					ja6:
+.0cca	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ccd					ja7:
+.0ccd	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cd0					ja8:
+.0cd0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cd3					ja9:
+.0cd3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cd6					jaa:
+.0cd6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cd9					jab:
+.0cd9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cdc					jac:
+.0cdc	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cdf					jad:
+.0cdf	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ce2					jae:
+.0ce2	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ce5					jaf:
+.0ce5	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ce8					jb0:
+.0ce8	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0ceb					jb1:
+.0ceb	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cee					jb2:
+.0cee	20 80 0a	jsr $0a80	    jsr INC_IP
+.0cf1	20 93 0a	jsr $0a93	    jsr FETCH_IP
+.0cf4	48		pha		                pha
+.0cf5	a9 00		lda #$00	                lda #$00
+.0cf7	48		pha		                pha                     ; push the value to the stack
+.0cf8	ab		plb		                plb                     ; pull value from stack to data bank register
+.0cf9	68		pla		                pla
+.0cfa	85 48		sta $48		    sta DL      ; store it
+.0cfc	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0cff					jb3:
+.0cff	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d02					jb4:
+.0d02	20 80 0a	jsr $0a80	    jsr INC_IP
+.0d05	20 93 0a	jsr $0a93	    jsr FETCH_IP
+.0d08	48		pha		                pha
+.0d09	a9 00		lda #$00	                lda #$00
+.0d0b	48		pha		                pha                     ; push the value to the stack
+.0d0c	ab		plb		                plb                     ; pull value from stack to data bank register
+.0d0d	68		pla		                pla
+.0d0e	85 43		sta $43		    sta AH      ; store it
+.0d10	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d13					jb5:
+.0d13	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d16					jb6:
+.0d16	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d19					jb7:
+.0d19	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d1c					jb8:
+.0d1c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d1f					jb9:
+.0d1f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d22					jba:
+.0d22	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d25					jbb:
+.0d25	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d28					jbc:
+.0d28	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d2b					jbd:
+.0d2b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d2e					jbe:
+.0d2e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d31					jbf:
+.0d31	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d34					jc0:
+.0d34	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d37					jc1:
+.0d37	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d3a					jc2:
+.0d3a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d3d					jc3:
+.0d3d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d40					jc4:
+.0d40	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d43					jc5:
+.0d43	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d46					jc6:
+.0d46	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d49					jc7:
+.0d49	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d4c					jc8:
+.0d4c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d4f					jc9:
+.0d4f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d52					jca:
+.0d52	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d55					jcb:
+.0d55	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d58					jcc:
+.0d58	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d5b					jcd:
+.0d5b	20 80 0a	jsr $0a80	    jsr INC_IP
+.0d5e	20 93 0a	jsr $0a93	    jsr FETCH_IP
+.0d61	c9 21		cmp #$21	    cmp #$21
+.0d63	f0 07		beq $0d6c	    beq jcd_putc
+.0d65	c9 20		cmp #$20	    cmp #$20
+.0d67	f0 11		beq $0d7a	    beq jcd_exit
+.0d69	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d6c					    jcd_putc:
+.0d6c	48		pha		                pha
+.0d6d	a9 00		lda #$00	                lda #$00
+.0d6f	48		pha		                pha                     ; push the value to the stack
+.0d70	ab		plb		                plb                     ; pull value from stack to data bank register
+.0d71	68		pla		                pla
+.0d72	a5 48		lda $48		        lda DL
+.0d74	20 d2 ff	jsr $ffd2	        jsr $FFD2
+.0d77	4c 64 0a	jmp $0a64	        jmp MAINLOOP_END
+.0d7a					    jcd_exit:
+.0d7a	4c 6a 0a	jmp $0a6a	        jmp EXIT
+.0d7d					jce:
+.0d7d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d80					jcf:
+.0d80	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d83					jd0:
+.0d83	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d86					jd1:
+.0d86	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d89					jd2:
+.0d89	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d8c					jd3:
+.0d8c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d8f					jd4:
+.0d8f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d92					jd5:
+.0d92	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d95					jd6:
+.0d95	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d98					jd7:
+.0d98	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d9b					jd8:
+.0d9b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0d9e					jd9:
+.0d9e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0da1					jda:
+.0da1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0da4					jdb:
+.0da4	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0da7					jdc:
+.0da7	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0daa					jdd:
+.0daa	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0dad					jde:
+.0dad	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0db0					jdf:
+.0db0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0db3					je0:
+.0db3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0db6					je1:
+.0db6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0db9					je2:
+.0db9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0dbc					je3:
+.0dbc	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0dbf					je4:
+.0dbf	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0dc2					je5:
+.0dc2	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0dc5					je6:
+.0dc5	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0dc8					je7:
+.0dc8	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0dcb					je8:
+.0dcb	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0dce					je9:
+.0dce	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0dd1					jea:
+.0dd1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0dd4					jeb:
+.0dd4	20 80 0a	jsr $0a80	    jsr INC_IP
+.0dd7	20 93 0a	jsr $0a93	    jsr FETCH_IP
+.0dda	48		pha		                pha
+.0ddb	a9 00		lda #$00	                lda #$00
+.0ddd	48		pha		                pha                     ; push the value to the stack
+.0dde	ab		plb		                plb                     ; pull value from stack to data bank register
+.0ddf	68		pla		                pla
+.0de0	c9 80		cmp #$80	    cmp #$80
+.0de2	b0 10		bcs $0df4	    bcs jeb_back
+.0de4					    jeb_forward:
+.0de4	85 5e		sta $5e		        sta TMP1
+.0de6	c2 20		rep #$20	                REP #$20
+.0de8	a5 52		lda $52		        lda IP
+.0dea	18		clc		        clc
+.0deb	65 5e		adc $5e		        adc TMP1
+.0ded	85 52		sta $52		        sta IP
+.0def	e2 20		sep #$20	                SEP #$20
+.0df1	4c 49 0a	jmp $0a49	        jmp MAINLOOP
+.0df4					    jeb_back:
+.0df4	49 ff		eor #$ff	        eor #$ff
+.0df6	85 5e		sta $5e		        sta TMP1
+.0df8	c2 20		rep #$20	                REP #$20
+.0dfa	a5 52		lda $52		        lda IP
+.0dfc	38		sec		        sec
+.0dfd	e5 5e		sbc $5e		        sbc TMP1
+.0dff	85 52		sta $52		        sta IP
+.0e01	e2 20		sep #$20	                SEP #$20
+.0e03	4c 49 0a	jmp $0a49	        jmp MAINLOOP
+.0e06					jec:
+.0e06	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e09					jed:
+.0e09	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e0c					jee:
+.0e0c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e0f					jef:
+.0e0f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e12					jf0:
+.0e12	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e15					jf1:
+.0e15	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e18					jf2:
+.0e18	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e1b					jf3:
+.0e1b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e1e					jf4:
+.0e1e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e21					jf5:
+.0e21	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e24					jf6:
+.0e24	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e27					jf7:
+.0e27	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e2a					jf8:
+.0e2a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e2d					jf9:
+.0e2d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e30					jfa:
+.0e30	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e33					jfb:
+.0e33	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e36					jfc:
+.0e36	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e39					jfd:
+.0e39	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e3c					jfe:
+.0e3c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0e3f					jff:
+.0e3f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+
+;******  End of listing
