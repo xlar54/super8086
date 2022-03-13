@@ -162,12 +162,7 @@ msg2:
 ; opcode operations
 ; -------------------------------------------------------
 j00:
-    lda #<msg2      ; print the startup message
-    sta $fe 
-    lda #>msg2
-    sta $ff
-    jsr print
-+   jmp EXIT
+    jmp MAINLOOP_END
 j01:
     jmp MAINLOOP_END
 j02:
@@ -295,6 +290,10 @@ j3e:
 j3f:
     jmp MAINLOOP_END
 j40:
+    .setdatabank $00
+    .rega16
+    inc AX
+    .rega8
     jmp MAINLOOP_END
 j41:
     jmp MAINLOOP_END
@@ -720,6 +719,21 @@ jfc:
 jfd:
     jmp MAINLOOP_END
 jfe:
+    jsr INC_IP
+    jsr FETCH_IP
+    cmp #$c0
+    beq jfe_al
+    cmp #$c4
+    beq jfe_ah
     jmp MAINLOOP_END
+
+    jfe_al:
+        .setdatabank $00
+        inc AL
+        jmp MAINLOOP_END
+    jfe_ah:
+        .setdatabank $00
+        inc AH
+        jmp MAINLOOP_END
 jff:
     jmp MAINLOOP_END
