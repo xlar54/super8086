@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.53.1515 listing file
 ; 64tass -a -l target\super8086.lbl -L target\super8086.lst -o target\super8086 src\super8086.asm
-; Sat Mar 12 20:38:28 2022
+; Mon Mar 14 23:39:23 2022
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -35,766 +35,2085 @@
 =$50					SS  = $50   ; stack segment reg
 =$52					IP  = $52   ; instruction pointer
 =$54					FR  = $54   ; flags register
+=$54					FRH = $54
+=$55					FRL = $55
 =$56					SP  = $56   ; stack pointer reg
 =$58					BP  = $58   ; base pointer reg
 =$5a					SI  = $5a   ; source index reg
 =$5c					DI  = $5c   ; destination index reg
 =$5e					TMP1 = $5e
 .080d					JUMPTBL:
->080d	cd 0a d0 0a d3 0a d6 0a		    .word j00, j01, j02, j03, j04, j05, j06, j07, j08, j09, j0a, j0b, j0c, j0d, j0e, j0f
->0815	d9 0a dc 0a df 0a e2 0a e5 0a e8 0a eb 0a ee 0a
->0825	f1 0a f4 0a f7 0a fa 0a
->082d	fd 0a 00 0b 03 0b 06 0b		    .word j10, j11, j12, j13, j14, j15, j16, j17, j18, j19, j1a, j1b, j1c, j1d, j1e, j1f
->0835	09 0b 0c 0b 0f 0b 12 0b 15 0b 18 0b 1b 0b 1e 0b
->0845	21 0b 24 0b 27 0b 2a 0b
->084d	2d 0b 30 0b 33 0b 36 0b		    .word j20, j21, j22, j23, j24, j25, j26, j27, j28, j29, j2a, j2b, j2c, j2d, j2e, j2f
->0855	39 0b 3c 0b 3f 0b 42 0b 45 0b 48 0b 4b 0b 4e 0b
->0865	51 0b 54 0b 57 0b 5a 0b
->086d	5d 0b 60 0b 63 0b 66 0b		    .word j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j3a, j3b, j3c, j3d, j3e, j3f
->0875	69 0b 6c 0b 6f 0b 72 0b 75 0b 78 0b 7b 0b 7e 0b
->0885	81 0b 84 0b 87 0b 8a 0b
->088d	8d 0b 9c 0b 9f 0b a2 0b		    .word j40, j41, j42, j43, j44, j45, j46, j47, j48, j49, j4a, j4b, j4c, j4d, j4e, j4f
->0895	a5 0b a8 0b ab 0b ae 0b b1 0b b4 0b b7 0b ba 0b
->08a5	bd 0b c0 0b c3 0b c6 0b
->08ad	c9 0b cc 0b cf 0b d2 0b		    .word j50, j51, j52, j53, j54, j55, j56, j57, j58, j59, j5a, j5b, j5c, j5d, j5e, j5f
->08b5	d5 0b d8 0b db 0b de 0b e1 0b e4 0b e7 0b ea 0b
->08c5	ed 0b f0 0b f3 0b f6 0b
->08cd	f9 0b fc 0b ff 0b 02 0c		    .word j60, j61, j62, j63, j64, j65, j66, j67, j68, j69, j6a, j6b, j6c, j6d, j6e, j6f
->08d5	05 0c 08 0c 0b 0c 0e 0c 11 0c 14 0c 17 0c 1a 0c
->08e5	1d 0c 20 0c 23 0c 26 0c
->08ed	29 0c 2c 0c 2f 0c 32 0c		    .word j70, j71, j72, j73, j74, j75, j76, j77, j78, j79, j7a, j7b, j7c, j7d, j7e, j7f
->08f5	35 0c 38 0c 3b 0c 3e 0c 41 0c 44 0c 47 0c 4a 0c
->0905	4d 0c 50 0c 53 0c 56 0c
->090d	59 0c 5c 0c 5f 0c 62 0c		    .word j80, j81, j82, j83, j84, j85, j86, j87, j88, j89, j8a, j8b, j8c, j8d, j8e, j8f
->0915	65 0c 68 0c 6b 0c 6e 0c 71 0c 74 0c 77 0c 7a 0c
->0925	7d 0c 80 0c 83 0c 86 0c
->092d	89 0c 8c 0c 8f 0c 92 0c		    .word j90, j91, j92, j93, j94, j95, j96, j97, j98, j99, j9a, j9b, j9c, j9d, j9e, j9f
->0935	95 0c 98 0c 9b 0c 9e 0c a1 0c a4 0c a7 0c aa 0c
->0945	ad 0c b0 0c b3 0c b6 0c
->094d	b9 0c bc 0c bf 0c c2 0c		    .word ja0, ja1, ja2, ja3, ja4, ja5, ja6, ja7, ja8, ja9, jaa, jab, jac, jad, jae, jaf
->0955	c5 0c c8 0c cb 0c ce 0c d1 0c d4 0c d7 0c da 0c
->0965	dd 0c e0 0c e3 0c e6 0c
->096d	e9 0c ec 0c ef 0c 00 0d		    .word jb0, jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jba, jbb, jbc, jbd, jbe, jbf
->0975	03 0d 14 0d 17 0d 1a 0d 1d 0d 20 0d 23 0d 26 0d
->0985	29 0d 2c 0d 2f 0d 32 0d
->098d	35 0d 38 0d 3b 0d 3e 0d		    .word jc0, jc1, jc2, jc3, jc4, jc5, jc6, jc7, jc8, jc9, jca, jcb, jcc, jcd, jce, jcf
->0995	41 0d 44 0d 47 0d 4a 0d 4d 0d 50 0d 53 0d 56 0d
->09a5	59 0d 5c 0d 7e 0d 81 0d
->09ad	84 0d 87 0d 8a 0d 8d 0d		    .word jd0, jd1, jd2, jd3, jd4, jd5, jd6, jd7, jd8, jd9, jda, jdb, jdc, jdd, jde, jdf
->09b5	90 0d 93 0d 96 0d 99 0d 9c 0d 9f 0d a2 0d a5 0d
->09c5	a8 0d ab 0d ae 0d b1 0d
->09cd	b4 0d b7 0d ba 0d bd 0d		    .word je0, je1, je2, je3, je4, je5, je6, je7, je8, je9, jea, jeb, jec, jed, jee, jef
->09d5	c0 0d c3 0d c6 0d c9 0d cc 0d cf 0d d2 0d d5 0d
->09e5	07 0e 0a 0e 0d 0e 10 0e
->09ed	13 0e 16 0e 19 0e 1c 0e		    .word jf0, jf1, jf2, jf3, jf4, jf5, jf6, jf7, jf8, jf9, jfa, jfb, jfc, jfd, jfe, jff
->09f5	1f 0e 22 0e 25 0e 28 0e 2b 0e 2e 0e 31 0e 34 0e
->0a05	37 0e 3a 0e 3d 0e 64 0e
+>080d	a8 0c ab 0c ae 0c b1 0c		    .word j00, j01, j02, j03, j04, j05, j06, j07, j08, j09, j0a, j0b, j0c, j0d, j0e, j0f
+>0815	b4 0c b7 0c ba 0c dd 0c 04 0d 07 0d 0a 0d 0d 0d
+>0825	10 0d 13 0d 16 0d 39 0d
+>082d	60 0d 63 0d 66 0d 69 0d		    .word j10, j11, j12, j13, j14, j15, j16, j17, j18, j19, j1a, j1b, j1c, j1d, j1e, j1f
+>0835	6c 0d 6f 0d 72 0d 95 0d bc 0d bf 0d c2 0d c5 0d
+>0845	c8 0d cb 0d ce 0d f1 0d
+>084d	18 0e 1b 0e 3a 0f 3d 0f		    .word j20, j21, j22, j23, j24, j25, j26, j27, j28, j29, j2a, j2b, j2c, j2d, j2e, j2f
+>0855	40 0f 43 0f 46 0f 49 0f 4c 0f 4f 0f 52 0f 55 0f
+>0865	58 0f 5b 0f 5e 0f 61 0f
+>086d	64 0f 67 0f 6a 0f 6d 0f		    .word j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j3a, j3b, j3c, j3d, j3e, j3f
+>0875	70 0f 73 0f 76 0f 79 0f 7c 0f 7f 0f 82 0f 85 0f
+>0885	88 0f 8b 0f 8e 0f 91 0f
+>088d	94 0f a3 0f b2 0f c1 0f		    .word j40, j41, j42, j43, j44, j45, j46, j47, j48, j49, j4a, j4b, j4c, j4d, j4e, j4f
+>0895	d0 0f d3 0f d6 0f d9 0f dc 0f df 0f e2 0f e5 0f
+>08a5	e8 0f eb 0f ee 0f f1 0f
+>08ad	f4 0f 17 10 3a 10 5d 10		    .word j50, j51, j52, j53, j54, j55, j56, j57, j58, j59, j5a, j5b, j5c, j5d, j5e, j5f
+>08b5	80 10 83 10 a6 10 c9 10 ec 10 13 11 3a 11 61 11
+>08c5	88 11 8b 11 b2 11 d9 11
+>08cd	00 12 03 12 06 12 09 12		    .word j60, j61, j62, j63, j64, j65, j66, j67, j68, j69, j6a, j6b, j6c, j6d, j6e, j6f
+>08d5	0c 12 0f 12 12 12 15 12 18 12 1b 12 1e 12 21 12
+>08e5	24 12 27 12 2a 12 2d 12
+>08ed	30 12 33 12 36 12 39 12		    .word j70, j71, j72, j73, j74, j75, j76, j77, j78, j79, j7a, j7b, j7c, j7d, j7e, j7f
+>08f5	3c 12 3f 12 42 12 45 12 48 12 4b 12 4e 12 51 12
+>0905	54 12 57 12 5a 12 5d 12
+>090d	60 12 63 12 66 12 69 12		    .word j80, j81, j82, j83, j84, j85, j86, j87, j88, j89, j8a, j8b, j8c, j8d, j8e, j8f
+>0915	6c 12 6f 12 72 12 75 12 78 12 7b 12 d1 13 d4 13
+>0925	d7 13 da 13 dd 13 e0 13
+>092d	e3 13 e6 13 e9 13 ec 13		    .word j90, j91, j92, j93, j94, j95, j96, j97, j98, j99, j9a, j9b, j9c, j9d, j9e, j9f
+>0935	ef 13 f2 13 f5 13 f8 13 fb 13 fe 13 01 14 04 14
+>0945	07 14 2a 14 51 14 5e 14
+>094d	6b 14 6e 14 71 14 74 14		    .word ja0, ja1, ja2, ja3, ja4, ja5, ja6, ja7, ja8, ja9, jaa, jab, jac, jad, jae, jaf
+>0955	77 14 7a 14 7d 14 80 14 83 14 86 14 89 14 8c 14
+>0965	8f 14 92 14 95 14 98 14
+>096d	9b 14 a9 14 b7 14 c5 14		    .word jb0, jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jba, jbb, jbc, jbd, jbe, jbf
+>0975	d3 14 e1 14 ef 14 fd 14 0b 15 24 15 3d 15 56 15
+>0985	6f 15 72 15 75 15 78 15
+>098d	7b 15 7e 15 81 15 84 15		    .word jc0, jc1, jc2, jc3, jc4, jc5, jc6, jc7, jc8, jc9, jca, jcb, jcc, jcd, jce, jcf
+>0995	87 15 8a 15 8d 15 90 15 93 15 96 15 99 15 9c 15
+>09a5	9f 15 a2 15 e5 15 e8 15
+>09ad	eb 15 ee 15 f1 15 f4 15		    .word jd0, jd1, jd2, jd3, jd4, jd5, jd6, jd7, jd8, jd9, jda, jdb, jdc, jdd, jde, jdf
+>09b5	f7 15 fa 15 fd 15 00 16 03 16 06 16 09 16 0c 16
+>09c5	0f 16 12 16 15 16 18 16
+>09cd	1b 16 1e 16 21 16 62 16		    .word je0, je1, je2, je3, je4, je5, je6, je7, je8, je9, jea, jeb, jec, jed, jee, jef
+>09d5	65 16 68 16 6b 16 6e 16 71 16 74 16 77 16 7a 16
+>09e5	a9 16 ac 16 af 16 b2 16
+>09ed	b5 16 b8 16 bb 16 be 16		    .word jf0, jf1, jf2, jf3, jf4, jf5, jf6, jf7, jf8, jf9, jfa, jfb, jfc, jfd, jfe, jff
+>09f5	c1 16 c4 16 c7 16 ca 16 cd 16 d0 16 d3 16 d6 16
+>0a05	d9 16 dc 16 df 16 5d 17
 .0a0d					JUMPADDR:
 >0a0d	00 00				    .word $0000
 .0a0f					start:
-.0a0f	a9 aa		lda #$aa	    lda #<msg1      ; print the startup message
+.0a0f	a9 52		lda #$52	    lda #<msg1      ; print the startup message
 .0a11	85 fe		sta $fe		    sta $fe
-.0a13	a9 0a		lda #$0a	    lda #>msg1
+.0a13	a9 0c		lda #$0c	    lda #>msg1
 .0a15	85 ff		sta $ff		    sta $ff
-.0a17	20 9c 0a	jsr $0a9c	    jsr print
+.0a17	20 1d 0c	jsr $0c1d	    jsr print
 .0a1a	18		clc		                clc
 .0a1b	fb		xce		                xce
 .0a1c	c2 20		rep #$20	                REP #$20
-.0a1e	a9 00 01	lda #$0100	    lda #$0100
-.0a21	85 52		sta $52		    sta IP
-.0a23	e2 30		sep #$30	                SEP #$30
-.0a25	a0 00		ldy #$00	    ldy #$00
-.0a27					LOAD:
-.0a27	b9 40 0a	lda $0a40,y	    lda X86PRG,y
-.0a2a	48		pha		                pha
-.0a2b	a9 02		lda #$02	                lda #$02
-.0a2d	48		pha		                pha                     ; push the value to the stack
-.0a2e	ab		plb		                plb                     ; pull value from stack to data bank register
-.0a2f	68		pla		                pla
-.0a30	91 52		sta ($52),y	    sta (IP),y
-.0a32	c8		iny		    iny
-.0a33	c0 08		cpy #$08	    cpy #$08
-.0a35	f0 12		beq $0a49	    beq MAINLOOP
-.0a37	48		pha		                pha
-.0a38	a9 00		lda #$00	                lda #$00
-.0a3a	48		pha		                pha                     ; push the value to the stack
-.0a3b	ab		plb		                plb                     ; pull value from stack to data bank register
-.0a3c	68		pla		                pla
-.0a3d	4c 27 0a	jmp $0a27	    jmp LOAD
-.0a40					X86PRG:
->0a40	b2 58 b4 02 cd 21 eb f8		    .byte $b2, $58, $b4, $02, $cd, $21, $eb, $f8, $00
->0a48	00
-.0a49					MAINLOOP:
-.0a49	a9 00		lda #$00	    lda #$00
-.0a4b	eb		xba		    xba
-.0a4c	20 93 0a	jsr $0a93	    jsr FETCH_IP
-.0a4f	48		pha		                pha
-.0a50	a9 00		lda #$00	                lda #$00
-.0a52	48		pha		                pha                     ; push the value to the stack
-.0a53	ab		plb		                plb                     ; pull value from stack to data bank register
-.0a54	68		pla		                pla
-.0a55	c2 30		rep #$30	                REP #$30
-.0a57	0a		asl a		    asl
-.0a58	a8		tay		    tay
-.0a59	b9 0d 08	lda $080d,y	    lda JUMPTBL,y
-.0a5c	8d 0d 0a	sta $0a0d	    sta JUMPADDR
-.0a5f	e2 30		sep #$30	                SEP #$30
-.0a61	6c 0d 0a	jmp ($0a0d)	    jmp (JUMPADDR)
-.0a64					MAINLOOP_END:
-.0a64	20 80 0a	jsr $0a80	    jsr INC_IP
-.0a67	4c 49 0a	jmp $0a49	    jmp MAINLOOP
-.0a6a					EXIT:
-.0a6a	e2 30		sep #$30	                SEP #$30
-.0a6c	48		pha		                pha
-.0a6d	a9 00		lda #$00	                lda #$00
-.0a6f	48		pha		                pha                     ; push the value to the stack
-.0a70	ab		plb		                plb                     ; pull value from stack to data bank register
-.0a71	68		pla		                pla
-.0a72	a9 c0		lda #$c0	    lda #<msg2      ; print the startup message
-.0a74	85 fe		sta $fe		    sta $fe
-.0a76	a9 0a		lda #$0a	    lda #>msg2
-.0a78	85 ff		sta $ff		    sta $ff
-.0a7a	20 9c 0a	jsr $0a9c	    jsr print
-.0a7d	38		sec		                sec
-.0a7e	fb		xce		                xce
-.0a7f	60		rts		    rts
-.0a80					INC_IP:
-.0a80	48		pha		                pha
-.0a81	a9 00		lda #$00	                lda #$00
-.0a83	48		pha		                pha                     ; push the value to the stack
-.0a84	ab		plb		                plb                     ; pull value from stack to data bank register
-.0a85	68		pla		                pla
-.0a86	c2 20		rep #$20	                REP #$20
-.0a88	a5 52		lda $52		    lda IP
-.0a8a	18		clc		    clc
-.0a8b	69 01 00	adc #$0001	    adc #$01
-.0a8e	85 52		sta $52		    sta IP      ; increment IP
-.0a90	e2 20		sep #$20	                SEP #$20
-.0a92	60		rts		    rts
-.0a93					FETCH_IP:
-.0a93	48		pha		                pha
-.0a94	a9 02		lda #$02	                lda #$02
-.0a96	48		pha		                pha                     ; push the value to the stack
-.0a97	ab		plb		                plb                     ; pull value from stack to data bank register
-.0a98	68		pla		                pla
-.0a99	b2 52		lda ($52)	    lda (IP)    ; get next value
-.0a9b	60		rts		    rts
-.0a9c					print:
-.0a9c	a0 00		ldy #$00	    ldy #$00
-.0a9e					nextch:
-.0a9e	b1 fe		lda ($fe),y	    lda ($fe),y
-.0aa0	f0 07		beq $0aa9	    beq +
-.0aa2	20 d2 ff	jsr $ffd2	    jsr $FFD2
-.0aa5	c8		iny		    iny
-.0aa6	4c 9e 0a	jmp $0a9e	    jmp nextch
-.0aa9	60		rts		+   rts
-.0aaa					msg1:
->0aaa	93 0e d3 55 50 45 52 38		    .text $93,$0e,"Super8086 Emulator",$0d,$00
->0ab2	30 38 36 20 c5 4d 55 4c 41 54 4f 52 0d 00
-.0ac0					msg2:
->0ac0	0d d4 45 52 4d 49 4e 41		    .text $0d,"Terminated",$0d,$00
->0ac8	54 45 44 0d 00
-.0acd					j00:
-.0acd	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ad0					j01:
-.0ad0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ad3					j02:
-.0ad3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ad6					j03:
-.0ad6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ad9					j04:
-.0ad9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0adc					j05:
-.0adc	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0adf					j06:
-.0adf	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ae2					j07:
-.0ae2	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ae5					j08:
-.0ae5	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ae8					j09:
-.0ae8	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0aeb					j0a:
-.0aeb	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0aee					j0b:
-.0aee	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0af1					j0c:
-.0af1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0af4					j0d:
-.0af4	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0af7					j0e:
-.0af7	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0afa					j0f:
-.0afa	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0afd					j10:
-.0afd	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b00					j11:
-.0b00	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b03					j12:
-.0b03	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b06					j13:
-.0b06	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b09					j14:
-.0b09	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b0c					j15:
-.0b0c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b0f					j16:
-.0b0f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b12					j17:
-.0b12	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b15					j18:
-.0b15	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b18					j19:
-.0b18	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b1b					j1a:
-.0b1b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b1e					j1b:
-.0b1e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b21					j1c:
-.0b21	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b24					j1d:
-.0b24	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b27					j1e:
-.0b27	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b2a					j1f:
-.0b2a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b2d					j20:
-.0b2d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b30					j21:
-.0b30	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b33					j22:
-.0b33	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b36					j23:
-.0b36	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b39					j24:
-.0b39	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b3c					j25:
-.0b3c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b3f					j26:
-.0b3f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b42					j27:
-.0b42	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b45					j28:
-.0b45	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b48					j29:
-.0b48	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b4b					j2a:
-.0b4b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b4e					j2b:
-.0b4e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b51					j2c:
-.0b51	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b54					j2d:
-.0b54	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b57					j2e:
-.0b57	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b5a					j2f:
-.0b5a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b5d					j30:
-.0b5d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b60					j31:
-.0b60	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b63					j32:
-.0b63	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b66					j33:
-.0b66	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b69					j34:
-.0b69	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b6c					j35:
-.0b6c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b6f					j36:
-.0b6f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b72					j37:
-.0b72	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b75					j38:
-.0b75	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b78					j39:
-.0b78	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b7b					j3a:
-.0b7b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b7e					j3b:
-.0b7e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b81					j3c:
-.0b81	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b84					j3d:
-.0b84	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b87					j3e:
-.0b87	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b8a					j3f:
-.0b8a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b8d					j40:
-.0b8d	48		pha		                pha
-.0b8e	a9 00		lda #$00	                lda #$00
-.0b90	48		pha		                pha                     ; push the value to the stack
-.0b91	ab		plb		                plb                     ; pull value from stack to data bank register
-.0b92	68		pla		                pla
-.0b93	c2 20		rep #$20	                REP #$20
-.0b95	e6 42		inc $42		    inc AX
-.0b97	e2 20		sep #$20	                SEP #$20
-.0b99	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b9c					j41:
-.0b9c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0b9f					j42:
-.0b9f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ba2					j43:
-.0ba2	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ba5					j44:
-.0ba5	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ba8					j45:
-.0ba8	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bab					j46:
-.0bab	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bae					j47:
-.0bae	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bb1					j48:
-.0bb1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bb4					j49:
-.0bb4	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bb7					j4a:
-.0bb7	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bba					j4b:
-.0bba	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bbd					j4c:
-.0bbd	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bc0					j4d:
-.0bc0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bc3					j4e:
-.0bc3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bc6					j4f:
-.0bc6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bc9					j50:
-.0bc9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bcc					j51:
-.0bcc	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bcf					j52:
-.0bcf	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bd2					j53:
-.0bd2	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bd5					j54:
-.0bd5	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bd8					j55:
-.0bd8	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bdb					j56:
-.0bdb	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bde					j57:
-.0bde	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0be1					j58:
-.0be1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0be4					j59:
-.0be4	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0be7					j5a:
-.0be7	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bea					j5b:
-.0bea	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bed					j5c:
-.0bed	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bf0					j5d:
-.0bf0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bf3					j5e:
-.0bf3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bf6					j5f:
-.0bf6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bf9					j60:
-.0bf9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bfc					j61:
-.0bfc	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0bff					j62:
-.0bff	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c02					j63:
-.0c02	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c05					j64:
-.0c05	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c08					j65:
-.0c08	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c0b					j66:
-.0c0b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c0e					j67:
-.0c0e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c11					j68:
-.0c11	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c14					j69:
-.0c14	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c17					j6a:
-.0c17	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c1a					j6b:
-.0c1a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c1d					j6c:
-.0c1d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c20					j6d:
-.0c20	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c23					j6e:
-.0c23	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c26					j6f:
-.0c26	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c29					j70:
-.0c29	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c2c					j71:
-.0c2c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c2f					j72:
-.0c2f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c32					j73:
-.0c32	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c35					j74:
-.0c35	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c38					j75:
-.0c38	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c3b					j76:
-.0c3b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c3e					j77:
-.0c3e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c41					j78:
-.0c41	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c44					j79:
-.0c44	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c47					j7a:
-.0c47	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c4a					j7b:
-.0c4a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c4d					j7c:
-.0c4d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c50					j7d:
-.0c50	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c53					j7e:
-.0c53	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c56					j7f:
-.0c56	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c59					j80:
-.0c59	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c5c					j81:
-.0c5c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c5f					j82:
-.0c5f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c62					j83:
-.0c62	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c65					j84:
-.0c65	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c68					j85:
-.0c68	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c6b					j86:
-.0c6b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c6e					j87:
-.0c6e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c71					j88:
-.0c71	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c74					j89:
-.0c74	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c77					j8a:
-.0c77	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c7a					j8b:
-.0c7a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c7d					j8c:
-.0c7d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c80					j8d:
-.0c80	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c83					j8e:
-.0c83	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c86					j8f:
-.0c86	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c89					j90:
-.0c89	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c8c					j91:
-.0c8c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c8f					j92:
-.0c8f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c92					j93:
-.0c92	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c95					j94:
-.0c95	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c98					j95:
-.0c98	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c9b					j96:
-.0c9b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0c9e					j97:
-.0c9e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ca1					j98:
-.0ca1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ca4					j99:
-.0ca4	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ca7					j9a:
-.0ca7	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0caa					j9b:
-.0caa	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cad					j9c:
-.0cad	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cb0					j9d:
-.0cb0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cb3					j9e:
-.0cb3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cb6					j9f:
-.0cb6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cb9					ja0:
-.0cb9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cbc					ja1:
-.0cbc	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cbf					ja2:
-.0cbf	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cc2					ja3:
-.0cc2	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cc5					ja4:
-.0cc5	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cc8					ja5:
-.0cc8	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ccb					ja6:
-.0ccb	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cce					ja7:
-.0cce	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cd1					ja8:
-.0cd1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cd4					ja9:
-.0cd4	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cd7					jaa:
-.0cd7	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cda					jab:
-.0cda	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cdd					jac:
-.0cdd	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ce0					jad:
-.0ce0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ce3					jae:
-.0ce3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ce6					jaf:
-.0ce6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0ce9					jb0:
-.0ce9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cec					jb1:
-.0cec	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0cef					jb2:
-.0cef	20 80 0a	jsr $0a80	    jsr INC_IP
-.0cf2	20 93 0a	jsr $0a93	    jsr FETCH_IP
-.0cf5	48		pha		                pha
-.0cf6	a9 00		lda #$00	                lda #$00
-.0cf8	48		pha		                pha                     ; push the value to the stack
-.0cf9	ab		plb		                plb                     ; pull value from stack to data bank register
-.0cfa	68		pla		                pla
-.0cfb	85 48		sta $48		    sta DL      ; store it
-.0cfd	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d00					jb3:
-.0d00	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d03					jb4:
-.0d03	20 80 0a	jsr $0a80	    jsr INC_IP
-.0d06	20 93 0a	jsr $0a93	    jsr FETCH_IP
-.0d09	48		pha		                pha
-.0d0a	a9 00		lda #$00	                lda #$00
-.0d0c	48		pha		                pha                     ; push the value to the stack
-.0d0d	ab		plb		                plb                     ; pull value from stack to data bank register
-.0d0e	68		pla		                pla
-.0d0f	85 43		sta $43		    sta AH      ; store it
-.0d11	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d14					jb5:
-.0d14	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d17					jb6:
-.0d17	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d1a					jb7:
-.0d1a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d1d					jb8:
-.0d1d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d20					jb9:
-.0d20	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d23					jba:
-.0d23	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d26					jbb:
-.0d26	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d29					jbc:
-.0d29	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d2c					jbd:
-.0d2c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d2f					jbe:
-.0d2f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d32					jbf:
-.0d32	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d35					jc0:
-.0d35	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d38					jc1:
-.0d38	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d3b					jc2:
-.0d3b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d3e					jc3:
-.0d3e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d41					jc4:
-.0d41	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d44					jc5:
-.0d44	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d47					jc6:
-.0d47	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d4a					jc7:
-.0d4a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d4d					jc8:
-.0d4d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d50					jc9:
-.0d50	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d53					jca:
-.0d53	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d56					jcb:
-.0d56	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d59					jcc:
-.0d59	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d5c					jcd:
-.0d5c	20 80 0a	jsr $0a80	    jsr INC_IP
-.0d5f	20 93 0a	jsr $0a93	    jsr FETCH_IP
-.0d62	c9 21		cmp #$21	    cmp #$21
-.0d64	f0 07		beq $0d6d	    beq jcd_putc
-.0d66	c9 20		cmp #$20	    cmp #$20
-.0d68	f0 11		beq $0d7b	    beq jcd_exit
-.0d6a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d6d					    jcd_putc:
-.0d6d	48		pha		                pha
-.0d6e	a9 00		lda #$00	                lda #$00
-.0d70	48		pha		                pha                     ; push the value to the stack
-.0d71	ab		plb		                plb                     ; pull value from stack to data bank register
-.0d72	68		pla		                pla
-.0d73	a5 48		lda $48		        lda DL
-.0d75	20 d2 ff	jsr $ffd2	        jsr $FFD2
-.0d78	4c 64 0a	jmp $0a64	        jmp MAINLOOP_END
-.0d7b					    jcd_exit:
-.0d7b	4c 6a 0a	jmp $0a6a	        jmp EXIT
-.0d7e					jce:
-.0d7e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d81					jcf:
-.0d81	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d84					jd0:
-.0d84	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d87					jd1:
-.0d87	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d8a					jd2:
-.0d8a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d8d					jd3:
-.0d8d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d90					jd4:
-.0d90	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d93					jd5:
-.0d93	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d96					jd6:
-.0d96	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d99					jd7:
-.0d99	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d9c					jd8:
-.0d9c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0d9f					jd9:
-.0d9f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0da2					jda:
-.0da2	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0da5					jdb:
-.0da5	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0da8					jdc:
-.0da8	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dab					jdd:
-.0dab	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dae					jde:
-.0dae	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0db1					jdf:
-.0db1	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0db4					je0:
-.0db4	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0db7					je1:
-.0db7	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dba					je2:
-.0dba	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dbd					je3:
-.0dbd	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dc0					je4:
-.0dc0	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dc3					je5:
-.0dc3	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dc6					je6:
-.0dc6	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dc9					je7:
-.0dc9	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dcc					je8:
-.0dcc	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dcf					je9:
-.0dcf	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dd2					jea:
-.0dd2	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0dd5					jeb:
-.0dd5	20 80 0a	jsr $0a80	    jsr INC_IP
-.0dd8	20 93 0a	jsr $0a93	    jsr FETCH_IP
-.0ddb	48		pha		                pha
-.0ddc	a9 00		lda #$00	                lda #$00
-.0dde	48		pha		                pha                     ; push the value to the stack
-.0ddf	ab		plb		                plb                     ; pull value from stack to data bank register
-.0de0	68		pla		                pla
-.0de1	c9 80		cmp #$80	    cmp #$80
-.0de3	b0 10		bcs $0df5	    bcs jeb_back
-.0de5					    jeb_forward:
-.0de5	85 5e		sta $5e		        sta TMP1
+.0a1e	64 42		stz $42		    stz AX
+.0a20	64 44		stz $44		    stz BX
+.0a22	64 46		stz $46		    stz CX
+.0a24	64 48		stz $48		    stz DX
+.0a26	64 4a		stz $4a		    stz CS
+.0a28	64 4c		stz $4c		    stz DS
+.0a2a	64 4e		stz $4e		    stz ES
+.0a2c	64 50		stz $50		    stz SS
+.0a2e	64 54		stz $54		    stz FR
+.0a30	a9 00 01	lda #$0100	    lda #$0100
+.0a33	85 52		sta $52		    sta IP
+.0a35	a9 ff ff	lda #$ffff	    lda #$FFFF
+.0a38	85 56		sta $56		    sta SP
+.0a3a	e2 30		sep #$30	                SEP #$30
+.0a3c	a0 00		ldy #$00	    ldy #$00
+.0a3e					LOAD:
+.0a3e	b9 57 0a	lda $0a57,y	    lda X86PRG,y
+.0a41	48		pha		                pha
+.0a42	a9 02		lda #$02	                lda #$02
+.0a44	48		pha		                pha                     ; push the value to the stack
+.0a45	ab		plb		                plb                     ; pull value from stack to data bank register
+.0a46	68		pla		                pla
+.0a47	91 52		sta ($52),y	    sta (IP),y
+.0a49	c8		iny		    iny
+.0a4a	c0 2a		cpy #$2a	    cpy #$2a
+.0a4c	f0 28		beq $0a76	    beq MAINLOOP
+.0a4e	48		pha		                pha
+.0a4f	a9 00		lda #$00	                lda #$00
+.0a51	48		pha		                pha                     ; push the value to the stack
+.0a52	ab		plb		                plb                     ; pull value from stack to data bank register
+.0a53	68		pla		                pla
+.0a54	4c 3e 0a	jmp $0a3e	    jmp LOAD
+.0a57					X86PRG:
+>0a57	ba 09 01			    .byte $ba, $09, $01 ; mov dX, 0109
+>0a5a	52				    .byte $52
+>0a5b	b4 09				    .byte $b4, $09      ; mov ah, 09
+>0a5d	cd 21				    .byte $cd, $21      ; int 21
+>0a5f	59				    .byte $59
+>0a60	cd 20				    .byte $cd, $20      ; int 20
+>0a62	48 45 4c 4c 4f 20 57 4f		    .text "hello world$"
+>0a6a	52 4c 44 24
+>0a6e	cd 20				    .byte $cd, $20      ; int 21
+>0a70	fe c2				    .byte $fe, $c2      ; inc DL
+>0a72	e2 f8				    .byte $e2, $f8      ; loop 0105
+>0a74	cd 20				    .byte $cd, $20      ; int 20
+.0a76					MAINLOOP:
+.0a76	a9 00		lda #$00	    lda #$00
+.0a78	eb		xba		    xba
+.0a79	20 14 0c	jsr $0c14	    jsr FETCH_IP
+.0a7c	48		pha		                pha
+.0a7d	a9 00		lda #$00	                lda #$00
+.0a7f	48		pha		                pha                     ; push the value to the stack
+.0a80	ab		plb		                plb                     ; pull value from stack to data bank register
+.0a81	68		pla		                pla
+.0a82	c2 30		rep #$30	                REP #$30
+.0a84	0a		asl a		    asl
+.0a85	a8		tay		    tay
+.0a86	b9 0d 08	lda $080d,y	    lda JUMPTBL,y
+.0a89	8d 0d 0a	sta $0a0d	    sta JUMPADDR
+.0a8c	e2 30		sep #$30	                SEP #$30
+.0a8e	6c 0d 0a	jmp ($0a0d)	    jmp (JUMPADDR)
+.0a91					MAINLOOP_END:
+.0a91	20 01 0c	jsr $0c01	    jsr INC_IP
+.0a94	4c 76 0a	jmp $0a76	    jmp MAINLOOP
+.0a97					EXIT:
+.0a97	e2 30		sep #$30	                SEP #$30
+.0a99	48		pha		                pha
+.0a9a	a9 00		lda #$00	                lda #$00
+.0a9c	48		pha		                pha                     ; push the value to the stack
+.0a9d	ab		plb		                plb                     ; pull value from stack to data bank register
+.0a9e	68		pla		                pla
+.0a9f	a9 68		lda #$68	    lda #<txt_ax      ; print the startup message
+.0aa1	85 fe		sta $fe		    sta $fe
+.0aa3	a9 0c		lda #$0c	    lda #>txt_ax
+.0aa5	85 ff		sta $ff		    sta $ff
+.0aa7	20 1d 0c	jsr $0c1d	    jsr print
+.0aaa	a5 43		lda $43		    lda AH
+.0aac	20 2b 0c	jsr $0c2b	    jsr prhex
+.0aaf	a5 42		lda $42		    lda AL
+.0ab1	20 2b 0c	jsr $0c2b	    jsr prhex
+.0ab4	a9 20		lda #$20	    lda #' '
+.0ab6	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0ab9	a9 6e		lda #$6e	    lda #<txt_bx      ; print the startup message
+.0abb	85 fe		sta $fe		    sta $fe
+.0abd	a9 0c		lda #$0c	    lda #>txt_bx
+.0abf	85 ff		sta $ff		    sta $ff
+.0ac1	20 1d 0c	jsr $0c1d	    jsr print
+.0ac4	a5 45		lda $45		    lda BH
+.0ac6	20 2b 0c	jsr $0c2b	    jsr prhex
+.0ac9	a5 44		lda $44		    lda BL
+.0acb	20 2b 0c	jsr $0c2b	    jsr prhex
+.0ace	a9 20		lda #$20	    lda #' '
+.0ad0	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0ad3	a9 72		lda #$72	    lda #<txt_cx      ; print the startup message
+.0ad5	85 fe		sta $fe		    sta $fe
+.0ad7	a9 0c		lda #$0c	    lda #>txt_cx
+.0ad9	85 ff		sta $ff		    sta $ff
+.0adb	20 1d 0c	jsr $0c1d	    jsr print
+.0ade	a5 47		lda $47		    lda CH
+.0ae0	20 2b 0c	jsr $0c2b	    jsr prhex
+.0ae3	a5 46		lda $46		    lda CL
+.0ae5	20 2b 0c	jsr $0c2b	    jsr prhex
+.0ae8	a9 20		lda #$20	    lda #' '
+.0aea	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0aed	a9 76		lda #$76	    lda #<txt_dx      ; print the startup message
+.0aef	85 fe		sta $fe		    sta $fe
+.0af1	a9 0c		lda #$0c	    lda #>txt_dx
+.0af3	85 ff		sta $ff		    sta $ff
+.0af5	20 1d 0c	jsr $0c1d	    jsr print
+.0af8	a5 49		lda $49		    lda DH
+.0afa	20 2b 0c	jsr $0c2b	    jsr prhex
+.0afd	a5 48		lda $48		    lda DL
+.0aff	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b02	a9 7a		lda #$7a	    lda #<txt_sp      ; print the startup message
+.0b04	85 fe		sta $fe		    sta $fe
+.0b06	a9 0c		lda #$0c	    lda #>txt_sp
+.0b08	85 ff		sta $ff		    sta $ff
+.0b0a	20 1d 0c	jsr $0c1d	    jsr print
+.0b0d	a5 56		lda $56		    lda SP
+.0b0f	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b12	a5 57		lda $57		    lda SP+1
+.0b14	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b17	a9 20		lda #$20	    lda #' '
+.0b19	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0b1c	a9 7f		lda #$7f	    lda #<txt_bp      ; print the startup message
+.0b1e	85 fe		sta $fe		    sta $fe
+.0b20	a9 0c		lda #$0c	    lda #>txt_bp
+.0b22	85 ff		sta $ff		    sta $ff
+.0b24	20 1d 0c	jsr $0c1d	    jsr print
+.0b27	a5 58		lda $58		    lda BP
+.0b29	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b2c	a5 5a		lda $5a		    lda BP+2
+.0b2e	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b31	a9 20		lda #$20	    lda #' '
+.0b33	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0b36	a9 83		lda #$83	    lda #<txt_si      ; print the startup message
+.0b38	85 fe		sta $fe		    sta $fe
+.0b3a	a9 0c		lda #$0c	    lda #>txt_si
+.0b3c	85 ff		sta $ff		    sta $ff
+.0b3e	20 1d 0c	jsr $0c1d	    jsr print
+.0b41	a5 5a		lda $5a		    lda SI
+.0b43	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b46	a5 5c		lda $5c		    lda SI+2
+.0b48	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b4b	a9 20		lda #$20	    lda #' '
+.0b4d	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0b50	a9 87		lda #$87	    lda #<txt_di      ; print the startup message
+.0b52	85 fe		sta $fe		    sta $fe
+.0b54	a9 0c		lda #$0c	    lda #>txt_di
+.0b56	85 ff		sta $ff		    sta $ff
+.0b58	20 1d 0c	jsr $0c1d	    jsr print
+.0b5b	a5 5c		lda $5c		    lda DI
+.0b5d	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b60	a5 5e		lda $5e		    lda DI+2
+.0b62	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b65	a9 8b		lda #$8b	    lda #<txt_ds      ; print the startup message
+.0b67	85 fe		sta $fe		    sta $fe
+.0b69	a9 0c		lda #$0c	    lda #>txt_ds
+.0b6b	85 ff		sta $ff		    sta $ff
+.0b6d	20 1d 0c	jsr $0c1d	    jsr print
+.0b70	a5 4c		lda $4c		    lda DS
+.0b72	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b75	a5 4d		lda $4d		    lda DS+1
+.0b77	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b7a	a9 20		lda #$20	    lda #' '
+.0b7c	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0b7f	a9 90		lda #$90	    lda #<txt_es      ; print the startup message
+.0b81	85 fe		sta $fe		    sta $fe
+.0b83	a9 0c		lda #$0c	    lda #>txt_es
+.0b85	85 ff		sta $ff		    sta $ff
+.0b87	20 1d 0c	jsr $0c1d	    jsr print
+.0b8a	a5 4e		lda $4e		    lda ES
+.0b8c	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b8f	a5 50		lda $50		    lda ES+2
+.0b91	20 2b 0c	jsr $0c2b	    jsr prhex
+.0b94	a9 20		lda #$20	    lda #' '
+.0b96	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0b99	a9 94		lda #$94	    lda #<txt_ss      ; print the startup message
+.0b9b	85 fe		sta $fe		    sta $fe
+.0b9d	a9 0c		lda #$0c	    lda #>txt_ss
+.0b9f	85 ff		sta $ff		    sta $ff
+.0ba1	20 1d 0c	jsr $0c1d	    jsr print
+.0ba4	a5 50		lda $50		    lda SS
+.0ba6	20 2b 0c	jsr $0c2b	    jsr prhex
+.0ba9	a5 52		lda $52		    lda SS+2
+.0bab	20 2b 0c	jsr $0c2b	    jsr prhex
+.0bae	a9 20		lda #$20	    lda #' '
+.0bb0	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0bb3	a9 98		lda #$98	    lda #<txt_cs      ; print the startup message
+.0bb5	85 fe		sta $fe		    sta $fe
+.0bb7	a9 0c		lda #$0c	    lda #>txt_cs
+.0bb9	85 ff		sta $ff		    sta $ff
+.0bbb	20 1d 0c	jsr $0c1d	    jsr print
+.0bbe	a5 4a		lda $4a		    lda CS
+.0bc0	20 2b 0c	jsr $0c2b	    jsr prhex
+.0bc3	a5 4c		lda $4c		    lda CS+2
+.0bc5	20 2b 0c	jsr $0c2b	    jsr prhex
+.0bc8	a9 9c		lda #$9c	    lda #<txt_ip      ; print the startup message
+.0bca	85 fe		sta $fe		    sta $fe
+.0bcc	a9 0c		lda #$0c	    lda #>txt_ip
+.0bce	85 ff		sta $ff		    sta $ff
+.0bd0	20 1d 0c	jsr $0c1d	    jsr print
+.0bd3	a5 53		lda $53		    lda IP+1
+.0bd5	20 2b 0c	jsr $0c2b	    jsr prhex
+.0bd8	a5 52		lda $52		    lda IP
+.0bda	20 2b 0c	jsr $0c2b	    jsr prhex
+.0bdd	a9 20		lda #$20	    lda #' '
+.0bdf	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0be2	a9 a1		lda #$a1	    lda #<txt_fr      ; print the startup message
+.0be4	85 fe		sta $fe		    sta $fe
+.0be6	a9 0c		lda #$0c	    lda #>txt_fr
+.0be8	85 ff		sta $ff		    sta $ff
+.0bea	20 1d 0c	jsr $0c1d	    jsr print
+.0bed	a5 54		lda $54		    lda FR
+.0bef	20 2b 0c	jsr $0c2b	    jsr prhex
+.0bf2	a5 56		lda $56		    lda FR+2
+.0bf4	20 2b 0c	jsr $0c2b	    jsr prhex
+.0bf7	38		sec		                sec
+.0bf8	fb		xce		                xce
+.0bf9	60		rts		    rts
+.0bfa					GETNEXT:
+.0bfa	20 01 0c	jsr $0c01	    jsr INC_IP
+.0bfd	20 14 0c	jsr $0c14	    jsr FETCH_IP
+.0c00	60		rts		    rts
+.0c01					INC_IP:
+.0c01	48		pha		                pha
+.0c02	a9 00		lda #$00	                lda #$00
+.0c04	48		pha		                pha                     ; push the value to the stack
+.0c05	ab		plb		                plb                     ; pull value from stack to data bank register
+.0c06	68		pla		                pla
+.0c07	c2 20		rep #$20	                REP #$20
+.0c09	a5 52		lda $52		    lda IP
+.0c0b	18		clc		    clc
+.0c0c	69 01 00	adc #$0001	    adc #$01
+.0c0f	85 52		sta $52		    sta IP      ; increment IP
+.0c11	e2 20		sep #$20	                SEP #$20
+.0c13	60		rts		    rts
+.0c14					FETCH_IP:
+.0c14	48		pha		                pha
+.0c15	a9 02		lda #$02	                lda #$02
+.0c17	48		pha		                pha                     ; push the value to the stack
+.0c18	ab		plb		                plb                     ; pull value from stack to data bank register
+.0c19	68		pla		                pla
+.0c1a	b2 52		lda ($52)	    lda (IP)    ; get next value
+.0c1c	60		rts		    rts
+.0c1d					print:
+.0c1d	a0 00		ldy #$00	    ldy #$00
+.0c1f					nextch:
+.0c1f	b1 fe		lda ($fe),y	    lda ($fe),y
+.0c21	f0 07		beq $0c2a	    beq +
+.0c23	20 d2 ff	jsr $ffd2	    jsr $FFD2
+.0c26	c8		iny		    iny
+.0c27	4c 1f 0c	jmp $0c1f	    jmp nextch
+.0c2a	60		rts		+   rts
+.0c2b					prhex
+.0c2b	48		pha		                pha
+.0c2c	a9 00		lda #$00	                lda #$00
+.0c2e	48		pha		                pha                     ; push the value to the stack
+.0c2f	ab		plb		                plb                     ; pull value from stack to data bank register
+.0c30	68		pla		                pla
+.0c31	da		phx		        phx                 ; save x
+.0c32	20 3d 0c	jsr $0c3d	        jsr asctwo          ; get hex chars for byte in x (lower) and a (upper)
+.0c35	20 d2 ff	jsr $ffd2	        jsr $ffd2          ; output upper nybble
+.0c38	8a		txa		        txa                 ; transfer lower to a
+.0c39	fa		plx		        plx                 ; restore x
+.0c3a	20 d2 ff	jsr $ffd2	        jsr $ffd2          ; output lower nybble
+.0c3d	48		pha		asctwo  pha                 ; save byte
+.0c3e	20 47 0c	jsr $0c47	        jsr ascii           ; do low nybble
+.0c41	aa		tax		        tax                 ; save in x
+.0c42	68		pla		        pla                 ; restore byte
+.0c43	4a		lsr a		        lsr a               ; shift upper nybble down
+.0c44	4a		lsr a		        lsr a
+.0c45	4a		lsr a		        lsr a
+.0c46	4a		lsr a		        lsr a
+.0c47	29 0f		and #$0f	ascii   and #$0f            ; clear upper nibble
+.0c49	c9 0a		cmp #$0a	        cmp #$0a            ; if less than a, skip next step
+.0c4b	90 02		bcc $0c4f	        bcc asc1
+.0c4d	69 06		adc #$06	        adc #6              ; skip ascii chars between 9 and a
+.0c4f	69 30		adc #$30	asc1    adc #$30            ; add ascii char 0 to value
+.0c51	60		rts		        rts
+.0c52					msg1:
+>0c52	93 0e d3 55 50 45 52 38		    .text $93,$0e,"Super8086 Emulator",$0d,$00
+>0c5a	30 38 36 20 c5 4d 55 4c 41 54 4f 52 0d 00
+.0c68					txt_ax:
+>0c68	0d 0d 41 58 3d 00		    .text $0d,$0d,"ax=",$00
+.0c6e					txt_bx:
+>0c6e	42 58 3d 00			    .text "bx=",$00
+.0c72					txt_cx
+>0c72	43 58 3d 00			    .text "cx=",$00
+.0c76					txt_dx
+>0c76	44 58 3d 00			    .text "dx=",$00
+.0c7a					txt_sp:
+>0c7a	0d 53 50 3d 00			    .text $0d,"sp=",$00
+.0c7f					txt_bp:
+>0c7f	42 50 3d 00			    .text "bp=",$00
+.0c83					txt_si
+>0c83	53 49 3d 00			    .text "si=",$00
+.0c87					txt_di
+>0c87	44 49 3d 00			    .text "di=",$00
+.0c8b					txt_ds:
+>0c8b	0d 44 53 3d 00			    .text $0d,"ds=",$00
+.0c90					txt_es:
+>0c90	45 53 3d 00			    .text "es=",$00
+.0c94					txt_ss
+>0c94	53 53 3d 00			    .text "ss=",$00
+.0c98					txt_cs
+>0c98	43 53 3d 00			    .text "cs=",$00
+.0c9c					txt_ip:
+>0c9c	0d 49 50 3d 00			    .text $0d,"ip=",$00
+.0ca1					txt_fr:
+>0ca1	46 4c 41 47 53 3d 00		    .text "flags=",$00
+.0ca8					j00:
+.0ca8	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0cab					j01:
+.0cab	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0cae					j02:
+.0cae	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0cb1					j03:
+.0cb1	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0cb4					j04:
+.0cb4	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0cb7					j05:
+.0cb7	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0cba					j06:
+.0cba	48		pha		                pha
+.0cbb	a9 00		lda #$00	                lda #$00
+.0cbd	48		pha		                pha                     ; push the value to the stack
+.0cbe	ab		plb		                plb                     ; pull value from stack to data bank register
+.0cbf	68		pla		                pla
+.0cc0	c2 20		rep #$20	                REP #$20
+.0cc2	a5 56		lda $56		    lda SP
+.0cc4	38		sec		    sec
+.0cc5	e9 02 00	sbc #$0002	    sbc #$02
+.0cc8	85 56		sta $56		    sta SP
+.0cca	a5 4e		lda $4e		    lda ES
+.0ccc	48		pha		                pha
+.0ccd	e2 20		sep #$20	                SEP #$20
+.0ccf	a9 02		lda #$02	                lda #$02
+.0cd1	48		pha		                pha                     ; push the value to the stack
+.0cd2	ab		plb		                plb                     ; pull value from stack to data bank register
+.0cd3	c2 20		rep #$20	                REP #$20
+.0cd5	68		pla		                pla
+.0cd6	92 56		sta ($56)	    sta (SP)
+.0cd8	e2 20		sep #$20	                SEP #$20
+.0cda	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0cdd					j07:
+.0cdd	c2 20		rep #$20	                REP #$20
+.0cdf	48		pha		                pha
+.0ce0	e2 20		sep #$20	                SEP #$20
+.0ce2	a9 02		lda #$02	                lda #$02
+.0ce4	48		pha		                pha                     ; push the value to the stack
+.0ce5	ab		plb		                plb                     ; pull value from stack to data bank register
+.0ce6	c2 20		rep #$20	                REP #$20
+.0ce8	68		pla		                pla
+.0ce9	b2 56		lda ($56)	    lda (SP)
+.0ceb	48		pha		                pha
+.0cec	e2 20		sep #$20	                SEP #$20
+.0cee	a9 00		lda #$00	                lda #$00
+.0cf0	48		pha		                pha                     ; push the value to the stack
+.0cf1	ab		plb		                plb                     ; pull value from stack to data bank register
+.0cf2	c2 20		rep #$20	                REP #$20
+.0cf4	68		pla		                pla
+.0cf5	85 4e		sta $4e		    sta ES
+.0cf7	a5 56		lda $56		    lda SP
+.0cf9	18		clc		    clc
+.0cfa	69 02 00	adc #$0002	    adc #$02
+.0cfd	85 56		sta $56		    sta SP
+.0cff	e2 20		sep #$20	                SEP #$20
+.0d01	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d04					j08:
+.0d04	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d07					j09:
+.0d07	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d0a					j0a:
+.0d0a	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d0d					j0b:
+.0d0d	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d10					j0c:
+.0d10	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d13					j0d:
+.0d13	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d16					j0e:
+.0d16	48		pha		                pha
+.0d17	a9 00		lda #$00	                lda #$00
+.0d19	48		pha		                pha                     ; push the value to the stack
+.0d1a	ab		plb		                plb                     ; pull value from stack to data bank register
+.0d1b	68		pla		                pla
+.0d1c	c2 20		rep #$20	                REP #$20
+.0d1e	a5 56		lda $56		    lda SP
+.0d20	38		sec		    sec
+.0d21	e9 02 00	sbc #$0002	    sbc #$02
+.0d24	85 56		sta $56		    sta SP
+.0d26	a5 4a		lda $4a		    lda CS
+.0d28	48		pha		                pha
+.0d29	e2 20		sep #$20	                SEP #$20
+.0d2b	a9 02		lda #$02	                lda #$02
+.0d2d	48		pha		                pha                     ; push the value to the stack
+.0d2e	ab		plb		                plb                     ; pull value from stack to data bank register
+.0d2f	c2 20		rep #$20	                REP #$20
+.0d31	68		pla		                pla
+.0d32	92 56		sta ($56)	    sta (SP)
+.0d34	e2 20		sep #$20	                SEP #$20
+.0d36	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d39					j0f:
+.0d39	c2 20		rep #$20	                REP #$20
+.0d3b	48		pha		                pha
+.0d3c	e2 20		sep #$20	                SEP #$20
+.0d3e	a9 02		lda #$02	                lda #$02
+.0d40	48		pha		                pha                     ; push the value to the stack
+.0d41	ab		plb		                plb                     ; pull value from stack to data bank register
+.0d42	c2 20		rep #$20	                REP #$20
+.0d44	68		pla		                pla
+.0d45	b2 56		lda ($56)	    lda (SP)
+.0d47	48		pha		                pha
+.0d48	e2 20		sep #$20	                SEP #$20
+.0d4a	a9 00		lda #$00	                lda #$00
+.0d4c	48		pha		                pha                     ; push the value to the stack
+.0d4d	ab		plb		                plb                     ; pull value from stack to data bank register
+.0d4e	c2 20		rep #$20	                REP #$20
+.0d50	68		pla		                pla
+.0d51	85 4a		sta $4a		    sta CS
+.0d53	a5 56		lda $56		    lda SP
+.0d55	18		clc		    clc
+.0d56	69 02 00	adc #$0002	    adc #$02
+.0d59	85 56		sta $56		    sta SP
+.0d5b	e2 20		sep #$20	                SEP #$20
+.0d5d	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d60					j10:
+.0d60	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d63					j11:
+.0d63	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d66					j12:
+.0d66	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d69					j13:
+.0d69	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d6c					j14:
+.0d6c	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d6f					j15:
+.0d6f	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d72					j16:
+.0d72	48		pha		                pha
+.0d73	a9 00		lda #$00	                lda #$00
+.0d75	48		pha		                pha                     ; push the value to the stack
+.0d76	ab		plb		                plb                     ; pull value from stack to data bank register
+.0d77	68		pla		                pla
+.0d78	c2 20		rep #$20	                REP #$20
+.0d7a	a5 56		lda $56		    lda SP
+.0d7c	38		sec		    sec
+.0d7d	e9 02 00	sbc #$0002	    sbc #$02
+.0d80	85 56		sta $56		    sta SP
+.0d82	a5 50		lda $50		    lda SS
+.0d84	48		pha		                pha
+.0d85	e2 20		sep #$20	                SEP #$20
+.0d87	a9 02		lda #$02	                lda #$02
+.0d89	48		pha		                pha                     ; push the value to the stack
+.0d8a	ab		plb		                plb                     ; pull value from stack to data bank register
+.0d8b	c2 20		rep #$20	                REP #$20
+.0d8d	68		pla		                pla
+.0d8e	92 56		sta ($56)	    sta (SP)
+.0d90	e2 20		sep #$20	                SEP #$20
+.0d92	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0d95					j17:
+.0d95	c2 20		rep #$20	                REP #$20
+.0d97	48		pha		                pha
+.0d98	e2 20		sep #$20	                SEP #$20
+.0d9a	a9 02		lda #$02	                lda #$02
+.0d9c	48		pha		                pha                     ; push the value to the stack
+.0d9d	ab		plb		                plb                     ; pull value from stack to data bank register
+.0d9e	c2 20		rep #$20	                REP #$20
+.0da0	68		pla		                pla
+.0da1	b2 56		lda ($56)	    lda (SP)
+.0da3	48		pha		                pha
+.0da4	e2 20		sep #$20	                SEP #$20
+.0da6	a9 00		lda #$00	                lda #$00
+.0da8	48		pha		                pha                     ; push the value to the stack
+.0da9	ab		plb		                plb                     ; pull value from stack to data bank register
+.0daa	c2 20		rep #$20	                REP #$20
+.0dac	68		pla		                pla
+.0dad	85 50		sta $50		    sta SS
+.0daf	a5 56		lda $56		    lda SP
+.0db1	18		clc		    clc
+.0db2	69 02 00	adc #$0002	    adc #$02
+.0db5	85 56		sta $56		    sta SP
+.0db7	e2 20		sep #$20	                SEP #$20
+.0db9	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0dbc					j18:
+.0dbc	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0dbf					j19:
+.0dbf	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0dc2					j1a:
+.0dc2	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0dc5					j1b:
+.0dc5	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0dc8					j1c:
+.0dc8	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0dcb					j1d:
+.0dcb	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0dce					j1e:
+.0dce	48		pha		                pha
+.0dcf	a9 00		lda #$00	                lda #$00
+.0dd1	48		pha		                pha                     ; push the value to the stack
+.0dd2	ab		plb		                plb                     ; pull value from stack to data bank register
+.0dd3	68		pla		                pla
+.0dd4	c2 20		rep #$20	                REP #$20
+.0dd6	a5 56		lda $56		    lda SP
+.0dd8	38		sec		    sec
+.0dd9	e9 02 00	sbc #$0002	    sbc #$02
+.0ddc	85 56		sta $56		    sta SP
+.0dde	a5 4e		lda $4e		    lda ES
+.0de0	48		pha		                pha
+.0de1	e2 20		sep #$20	                SEP #$20
+.0de3	a9 02		lda #$02	                lda #$02
+.0de5	48		pha		                pha                     ; push the value to the stack
+.0de6	ab		plb		                plb                     ; pull value from stack to data bank register
 .0de7	c2 20		rep #$20	                REP #$20
-.0de9	a5 52		lda $52		        lda IP
-.0deb	18		clc		        clc
-.0dec	65 5e		adc $5e		        adc TMP1
-.0dee	85 52		sta $52		        sta IP
-.0df0	e2 20		sep #$20	                SEP #$20
-.0df2	4c 49 0a	jmp $0a49	        jmp MAINLOOP
-.0df5					    jeb_back:
-.0df5	49 ff		eor #$ff	        eor #$ff
-.0df7	85 5e		sta $5e		        sta TMP1
-.0df9	c2 20		rep #$20	                REP #$20
-.0dfb	a5 52		lda $52		        lda IP
-.0dfd	38		sec		        sec
-.0dfe	e5 5e		sbc $5e		        sbc TMP1
-.0e00	85 52		sta $52		        sta IP
-.0e02	e2 20		sep #$20	                SEP #$20
-.0e04	4c 49 0a	jmp $0a49	        jmp MAINLOOP
-.0e07					jec:
-.0e07	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e0a					jed:
-.0e0a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e0d					jee:
-.0e0d	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e10					jef:
-.0e10	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e13					jf0:
-.0e13	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e16					jf1:
-.0e16	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e19					jf2:
-.0e19	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e1c					jf3:
-.0e1c	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e1f					jf4:
-.0e1f	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e22					jf5:
-.0e22	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e25					jf6:
-.0e25	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e28					jf7:
-.0e28	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e2b					jf8:
-.0e2b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e2e					jf9:
-.0e2e	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e31					jfa:
-.0e31	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e34					jfb:
-.0e34	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e37					jfc:
-.0e37	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e3a					jfd:
-.0e3a	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e3d					jfe:
-.0e3d	20 80 0a	jsr $0a80	    jsr INC_IP
-.0e40	20 93 0a	jsr $0a93	    jsr FETCH_IP
-.0e43	c9 c0		cmp #$c0	    cmp #$c0
-.0e45	f0 07		beq $0e4e	    beq jfe_al
-.0e47	c9 c4		cmp #$c4	    cmp #$c4
-.0e49	f0 0e		beq $0e59	    beq jfe_ah
-.0e4b	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
-.0e4e					    jfe_al:
-.0e4e	48		pha		                pha
-.0e4f	a9 00		lda #$00	                lda #$00
-.0e51	48		pha		                pha                     ; push the value to the stack
-.0e52	ab		plb		                plb                     ; pull value from stack to data bank register
-.0e53	68		pla		                pla
-.0e54	e6 42		inc $42		        inc AL
-.0e56	4c 64 0a	jmp $0a64	        jmp MAINLOOP_END
-.0e59					    jfe_ah:
-.0e59	48		pha		                pha
-.0e5a	a9 00		lda #$00	                lda #$00
-.0e5c	48		pha		                pha                     ; push the value to the stack
-.0e5d	ab		plb		                plb                     ; pull value from stack to data bank register
-.0e5e	68		pla		                pla
-.0e5f	e6 43		inc $43		        inc AH
-.0e61	4c 64 0a	jmp $0a64	        jmp MAINLOOP_END
-.0e64					jff:
-.0e64	4c 64 0a	jmp $0a64	    jmp MAINLOOP_END
+.0de9	68		pla		                pla
+.0dea	92 56		sta ($56)	    sta (SP)
+.0dec	e2 20		sep #$20	                SEP #$20
+.0dee	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0df1					j1f:
+.0df1	c2 20		rep #$20	                REP #$20
+.0df3	48		pha		                pha
+.0df4	e2 20		sep #$20	                SEP #$20
+.0df6	a9 02		lda #$02	                lda #$02
+.0df8	48		pha		                pha                     ; push the value to the stack
+.0df9	ab		plb		                plb                     ; pull value from stack to data bank register
+.0dfa	c2 20		rep #$20	                REP #$20
+.0dfc	68		pla		                pla
+.0dfd	b2 56		lda ($56)	    lda (SP)
+.0dff	48		pha		                pha
+.0e00	e2 20		sep #$20	                SEP #$20
+.0e02	a9 00		lda #$00	                lda #$00
+.0e04	48		pha		                pha                     ; push the value to the stack
+.0e05	ab		plb		                plb                     ; pull value from stack to data bank register
+.0e06	c2 20		rep #$20	                REP #$20
+.0e08	68		pla		                pla
+.0e09	85 4c		sta $4c		    sta DS
+.0e0b	a5 56		lda $56		    lda SP
+.0e0d	18		clc		    clc
+.0e0e	69 02 00	adc #$0002	    adc #$02
+.0e11	85 56		sta $56		    sta SP
+.0e13	e2 20		sep #$20	                SEP #$20
+.0e15	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0e18					j20:
+.0e18	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0e1b					j21:
+.0e1b	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.0e1e	48		pha		                pha
+.0e1f	a9 00		lda #$00	                lda #$00
+.0e21	48		pha		                pha                     ; push the value to the stack
+.0e22	ab		plb		                plb                     ; pull value from stack to data bank register
+.0e23	68		pla		                pla
+.0e24	c9 c0		cmp #$c0	    cmp #$c0
+.0e26	f0 1f		beq $0e47	    beq j21_ax_ax
+.0e28	c9 d8		cmp #$d8	    cmp #$d8
+.0e2a	f0 28		beq $0e54	    beq j21_ax_bx
+.0e2c	c9 d8		cmp #$d8	    cmp #$d8
+.0e2e	f0 31		beq $0e61	    beq j21_ax_cx
+.0e30	c9 d8		cmp #$d8	    cmp #$d8
+.0e32	f0 3a		beq $0e6e	    beq j21_ax_dx
+.0e34	c9 d8		cmp #$d8	    cmp #$d8
+.0e36	f0 43		beq $0e7b	    beq j21_bx_ax
+.0e38	c9 d8		cmp #$d8	    cmp #$d8
+.0e3a	f0 4c		beq $0e88	    beq j21_bx_bx
+.0e3c	c9 d8		cmp #$d8	    cmp #$d8
+.0e3e	f0 55		beq $0e95	    beq j21_bx_cx
+.0e40	c9 d8		cmp #$d8	    cmp #$d8
+.0e42	f0 5e		beq $0ea2	    beq j21_bx_dx
+.0e44	4c af 0e	jmp $0eaf	    jmp j21_cmp2
+.0e47					    j21_ax_ax:
+.0e47	c2 20		rep #$20	                REP #$20
+.0e49	a5 42		lda $42		        lda AX
+.0e4b	25 42		and $42		        and AX
+.0e4d	85 42		sta $42		        sta AX
+.0e4f	e2 20		sep #$20	                SEP #$20
+.0e51	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0e54					    j21_ax_bx:
+.0e54	c2 20		rep #$20	                REP #$20
+.0e56	a5 44		lda $44		        lda BX
+.0e58	25 42		and $42		        and AX
+.0e5a	85 42		sta $42		        sta AX
+.0e5c	e2 20		sep #$20	                SEP #$20
+.0e5e	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0e61					    j21_ax_cx:
+.0e61	c2 20		rep #$20	                REP #$20
+.0e63	a5 46		lda $46		        lda CX
+.0e65	25 42		and $42		        and AX
+.0e67	85 42		sta $42		        sta AX
+.0e69	e2 20		sep #$20	                SEP #$20
+.0e6b	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0e6e					    j21_ax_dx:
+.0e6e	c2 20		rep #$20	                REP #$20
+.0e70	a5 48		lda $48		        lda DX
+.0e72	25 42		and $42		        and AX
+.0e74	85 42		sta $42		        sta AX
+.0e76	e2 20		sep #$20	                SEP #$20
+.0e78	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0e7b					    j21_bx_ax:
+.0e7b	c2 20		rep #$20	                REP #$20
+.0e7d	a5 42		lda $42		        lda AX
+.0e7f	25 44		and $44		        and BX
+.0e81	85 44		sta $44		        sta BX
+.0e83	e2 20		sep #$20	                SEP #$20
+.0e85	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0e88					    j21_bx_bx:
+.0e88	c2 20		rep #$20	                REP #$20
+.0e8a	a5 44		lda $44		        lda BX
+.0e8c	25 44		and $44		        and BX
+.0e8e	85 44		sta $44		        sta BX
+.0e90	e2 20		sep #$20	                SEP #$20
+.0e92	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0e95					    j21_bx_cx:
+.0e95	c2 20		rep #$20	                REP #$20
+.0e97	a5 46		lda $46		        lda CX
+.0e99	25 44		and $44		        and BX
+.0e9b	85 44		sta $44		        sta BX
+.0e9d	e2 20		sep #$20	                SEP #$20
+.0e9f	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0ea2					    j21_bx_dx:
+.0ea2	c2 20		rep #$20	                REP #$20
+.0ea4	a5 48		lda $48		        lda DX
+.0ea6	25 44		and $44		        and BX
+.0ea8	85 44		sta $44		        sta BX
+.0eaa	e2 20		sep #$20	                SEP #$20
+.0eac	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0eaf					    j21_cmp2:
+.0eaf	c9 d8		cmp #$d8	        cmp #$d8
+.0eb1	f0 1f		beq $0ed2	        beq j21_cx_ax
+.0eb3	c9 d8		cmp #$d8	        cmp #$d8
+.0eb5	f0 28		beq $0edf	        beq j21_cx_bx
+.0eb7	c9 d8		cmp #$d8	        cmp #$d8
+.0eb9	f0 31		beq $0eec	        beq j21_cx_cx
+.0ebb	c9 d8		cmp #$d8	        cmp #$d8
+.0ebd	f0 3a		beq $0ef9	        beq j21_cx_dx
+.0ebf	c9 d8		cmp #$d8	        cmp #$d8
+.0ec1	f0 43		beq $0f06	        beq j21_dx_ax
+.0ec3	c9 d8		cmp #$d8	        cmp #$d8
+.0ec5	f0 4c		beq $0f13	        beq j21_dx_bx
+.0ec7	c9 d8		cmp #$d8	        cmp #$d8
+.0ec9	f0 55		beq $0f20	        beq j21_dx_cx
+.0ecb	c9 d8		cmp #$d8	        cmp #$d8
+.0ecd	f0 5e		beq $0f2d	        beq j21_dx_dx
+.0ecf	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0ed2					    j21_cx_ax:
+.0ed2	c2 20		rep #$20	                REP #$20
+.0ed4	a5 42		lda $42		        lda AX
+.0ed6	25 46		and $46		        and CX
+.0ed8	85 46		sta $46		        sta CX
+.0eda	e2 20		sep #$20	                SEP #$20
+.0edc	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0edf					    j21_cx_bx:
+.0edf	c2 20		rep #$20	                REP #$20
+.0ee1	a5 44		lda $44		        lda BX
+.0ee3	25 46		and $46		        and CX
+.0ee5	85 46		sta $46		        sta CX
+.0ee7	e2 20		sep #$20	                SEP #$20
+.0ee9	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0eec					    j21_cx_cx:
+.0eec	c2 20		rep #$20	                REP #$20
+.0eee	a5 46		lda $46		        lda CX
+.0ef0	25 46		and $46		        and CX
+.0ef2	85 46		sta $46		        sta CX
+.0ef4	e2 20		sep #$20	                SEP #$20
+.0ef6	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0ef9					    j21_cx_dx:
+.0ef9	c2 20		rep #$20	                REP #$20
+.0efb	a5 48		lda $48		        lda DX
+.0efd	25 46		and $46		        and CX
+.0eff	85 46		sta $46		        sta CX
+.0f01	e2 20		sep #$20	                SEP #$20
+.0f03	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0f06					    j21_dx_ax:
+.0f06	c2 20		rep #$20	                REP #$20
+.0f08	a5 42		lda $42		        lda AX
+.0f0a	25 48		and $48		        and DX
+.0f0c	85 48		sta $48		        sta DX
+.0f0e	e2 20		sep #$20	                SEP #$20
+.0f10	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0f13					    j21_dx_bx:
+.0f13	c2 20		rep #$20	                REP #$20
+.0f15	a5 44		lda $44		        lda BX
+.0f17	25 48		and $48		        and DX
+.0f19	85 48		sta $48		        sta DX
+.0f1b	e2 20		sep #$20	                SEP #$20
+.0f1d	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0f20					    j21_dx_cx:
+.0f20	c2 20		rep #$20	                REP #$20
+.0f22	a5 46		lda $46		        lda CX
+.0f24	25 48		and $48		        and DX
+.0f26	85 48		sta $48		        sta DX
+.0f28	e2 20		sep #$20	                SEP #$20
+.0f2a	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0f2d					    j21_dx_dx:
+.0f2d	c2 20		rep #$20	                REP #$20
+.0f2f	a5 48		lda $48		        lda DX
+.0f31	25 48		and $48		        and DX
+.0f33	85 48		sta $48		        sta DX
+.0f35	e2 20		sep #$20	                SEP #$20
+.0f37	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.0f3a					j22:
+.0f3a	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f3d					j23:
+.0f3d	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f40					j24:
+.0f40	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f43					j25:
+.0f43	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f46					j26:
+.0f46	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f49					j27:
+.0f49	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f4c					j28:
+.0f4c	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f4f					j29:
+.0f4f	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f52					j2a:
+.0f52	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f55					j2b:
+.0f55	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f58					j2c:
+.0f58	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f5b					j2d:
+.0f5b	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f5e					j2e:
+.0f5e	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f61					j2f:
+.0f61	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f64					j30:
+.0f64	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f67					j31:
+.0f67	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f6a					j32:
+.0f6a	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f6d					j33:
+.0f6d	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f70					j34:
+.0f70	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f73					j35:
+.0f73	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f76					j36:
+.0f76	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f79					j37:
+.0f79	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f7c					j38:
+.0f7c	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f7f					j39:
+.0f7f	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f82					j3a:
+.0f82	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f85					j3b:
+.0f85	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f88					j3c:
+.0f88	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f8b					j3d:
+.0f8b	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f8e					j3e:
+.0f8e	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f91					j3f:
+.0f91	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0f94					j40:
+.0f94	48		pha		                pha
+.0f95	a9 00		lda #$00	                lda #$00
+.0f97	48		pha		                pha                     ; push the value to the stack
+.0f98	ab		plb		                plb                     ; pull value from stack to data bank register
+.0f99	68		pla		                pla
+.0f9a	c2 20		rep #$20	                REP #$20
+.0f9c	e6 42		inc $42		    inc AX
+.0f9e	e2 20		sep #$20	                SEP #$20
+.0fa0	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fa3					j41:
+.0fa3	48		pha		                pha
+.0fa4	a9 00		lda #$00	                lda #$00
+.0fa6	48		pha		                pha                     ; push the value to the stack
+.0fa7	ab		plb		                plb                     ; pull value from stack to data bank register
+.0fa8	68		pla		                pla
+.0fa9	c2 20		rep #$20	                REP #$20
+.0fab	e6 46		inc $46		    inc CX
+.0fad	e2 20		sep #$20	                SEP #$20
+.0faf	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fb2					j42:
+.0fb2	48		pha		                pha
+.0fb3	a9 00		lda #$00	                lda #$00
+.0fb5	48		pha		                pha                     ; push the value to the stack
+.0fb6	ab		plb		                plb                     ; pull value from stack to data bank register
+.0fb7	68		pla		                pla
+.0fb8	c2 20		rep #$20	                REP #$20
+.0fba	e6 48		inc $48		    inc DX
+.0fbc	e2 20		sep #$20	                SEP #$20
+.0fbe	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fc1					j43:
+.0fc1	48		pha		                pha
+.0fc2	a9 00		lda #$00	                lda #$00
+.0fc4	48		pha		                pha                     ; push the value to the stack
+.0fc5	ab		plb		                plb                     ; pull value from stack to data bank register
+.0fc6	68		pla		                pla
+.0fc7	c2 20		rep #$20	                REP #$20
+.0fc9	e6 44		inc $44		    inc BX
+.0fcb	e2 20		sep #$20	                SEP #$20
+.0fcd	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fd0					j44:
+.0fd0	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fd3					j45:
+.0fd3	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fd6					j46:
+.0fd6	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fd9					j47:
+.0fd9	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fdc					j48:
+.0fdc	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fdf					j49:
+.0fdf	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fe2					j4a:
+.0fe2	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fe5					j4b:
+.0fe5	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fe8					j4c:
+.0fe8	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0feb					j4d:
+.0feb	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0fee					j4e:
+.0fee	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0ff1					j4f:
+.0ff1	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.0ff4					j50:
+.0ff4	48		pha		                pha
+.0ff5	a9 00		lda #$00	                lda #$00
+.0ff7	48		pha		                pha                     ; push the value to the stack
+.0ff8	ab		plb		                plb                     ; pull value from stack to data bank register
+.0ff9	68		pla		                pla
+.0ffa	c2 20		rep #$20	                REP #$20
+.0ffc	a5 56		lda $56		    lda SP
+.0ffe	38		sec		    sec
+.0fff	e9 02 00	sbc #$0002	    sbc #$02
+.1002	85 56		sta $56		    sta SP
+.1004	a5 42		lda $42		    lda AX
+.1006	48		pha		                pha
+.1007	e2 20		sep #$20	                SEP #$20
+.1009	a9 02		lda #$02	                lda #$02
+.100b	48		pha		                pha                     ; push the value to the stack
+.100c	ab		plb		                plb                     ; pull value from stack to data bank register
+.100d	c2 20		rep #$20	                REP #$20
+.100f	68		pla		                pla
+.1010	92 56		sta ($56)	    sta (SP)
+.1012	e2 20		sep #$20	                SEP #$20
+.1014	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1017					j51:
+.1017	48		pha		                pha
+.1018	a9 00		lda #$00	                lda #$00
+.101a	48		pha		                pha                     ; push the value to the stack
+.101b	ab		plb		                plb                     ; pull value from stack to data bank register
+.101c	68		pla		                pla
+.101d	c2 20		rep #$20	                REP #$20
+.101f	a5 56		lda $56		    lda SP
+.1021	38		sec		    sec
+.1022	e9 02 00	sbc #$0002	    sbc #$02
+.1025	85 56		sta $56		    sta SP
+.1027	a5 46		lda $46		    lda CX
+.1029	48		pha		                pha
+.102a	e2 20		sep #$20	                SEP #$20
+.102c	a9 02		lda #$02	                lda #$02
+.102e	48		pha		                pha                     ; push the value to the stack
+.102f	ab		plb		                plb                     ; pull value from stack to data bank register
+.1030	c2 20		rep #$20	                REP #$20
+.1032	68		pla		                pla
+.1033	92 56		sta ($56)	    sta (SP)
+.1035	e2 20		sep #$20	                SEP #$20
+.1037	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.103a					j52:
+.103a	48		pha		                pha
+.103b	a9 00		lda #$00	                lda #$00
+.103d	48		pha		                pha                     ; push the value to the stack
+.103e	ab		plb		                plb                     ; pull value from stack to data bank register
+.103f	68		pla		                pla
+.1040	c2 20		rep #$20	                REP #$20
+.1042	a5 56		lda $56		    lda SP
+.1044	38		sec		    sec
+.1045	e9 02 00	sbc #$0002	    sbc #$02
+.1048	85 56		sta $56		    sta SP
+.104a	a5 48		lda $48		    lda DX
+.104c	48		pha		                pha
+.104d	e2 20		sep #$20	                SEP #$20
+.104f	a9 02		lda #$02	                lda #$02
+.1051	48		pha		                pha                     ; push the value to the stack
+.1052	ab		plb		                plb                     ; pull value from stack to data bank register
+.1053	c2 20		rep #$20	                REP #$20
+.1055	68		pla		                pla
+.1056	92 56		sta ($56)	    sta (SP)
+.1058	e2 20		sep #$20	                SEP #$20
+.105a	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.105d					j53:
+.105d	48		pha		                pha
+.105e	a9 00		lda #$00	                lda #$00
+.1060	48		pha		                pha                     ; push the value to the stack
+.1061	ab		plb		                plb                     ; pull value from stack to data bank register
+.1062	68		pla		                pla
+.1063	c2 20		rep #$20	                REP #$20
+.1065	a5 56		lda $56		    lda SP
+.1067	38		sec		    sec
+.1068	e9 02 00	sbc #$0002	    sbc #$02
+.106b	85 56		sta $56		    sta SP
+.106d	a5 44		lda $44		    lda BX
+.106f	48		pha		                pha
+.1070	e2 20		sep #$20	                SEP #$20
+.1072	a9 02		lda #$02	                lda #$02
+.1074	48		pha		                pha                     ; push the value to the stack
+.1075	ab		plb		                plb                     ; pull value from stack to data bank register
+.1076	c2 20		rep #$20	                REP #$20
+.1078	68		pla		                pla
+.1079	92 56		sta ($56)	    sta (SP)
+.107b	e2 20		sep #$20	                SEP #$20
+.107d	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1080					j54:
+.1080	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1083					j55:
+.1083	48		pha		                pha
+.1084	a9 00		lda #$00	                lda #$00
+.1086	48		pha		                pha                     ; push the value to the stack
+.1087	ab		plb		                plb                     ; pull value from stack to data bank register
+.1088	68		pla		                pla
+.1089	c2 20		rep #$20	                REP #$20
+.108b	a5 56		lda $56		    lda SP
+.108d	38		sec		    sec
+.108e	e9 02 00	sbc #$0002	    sbc #$02
+.1091	85 56		sta $56		    sta SP
+.1093	a5 58		lda $58		    lda BP
+.1095	48		pha		                pha
+.1096	e2 20		sep #$20	                SEP #$20
+.1098	a9 02		lda #$02	                lda #$02
+.109a	48		pha		                pha                     ; push the value to the stack
+.109b	ab		plb		                plb                     ; pull value from stack to data bank register
+.109c	c2 20		rep #$20	                REP #$20
+.109e	68		pla		                pla
+.109f	92 56		sta ($56)	    sta (SP)
+.10a1	e2 20		sep #$20	                SEP #$20
+.10a3	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.10a6					j56:
+.10a6	48		pha		                pha
+.10a7	a9 00		lda #$00	                lda #$00
+.10a9	48		pha		                pha                     ; push the value to the stack
+.10aa	ab		plb		                plb                     ; pull value from stack to data bank register
+.10ab	68		pla		                pla
+.10ac	c2 20		rep #$20	                REP #$20
+.10ae	a5 56		lda $56		    lda SP
+.10b0	38		sec		    sec
+.10b1	e9 02 00	sbc #$0002	    sbc #$02
+.10b4	85 56		sta $56		    sta SP
+.10b6	a5 5a		lda $5a		    lda SI
+.10b8	48		pha		                pha
+.10b9	e2 20		sep #$20	                SEP #$20
+.10bb	a9 02		lda #$02	                lda #$02
+.10bd	48		pha		                pha                     ; push the value to the stack
+.10be	ab		plb		                plb                     ; pull value from stack to data bank register
+.10bf	c2 20		rep #$20	                REP #$20
+.10c1	68		pla		                pla
+.10c2	92 56		sta ($56)	    sta (SP)
+.10c4	e2 20		sep #$20	                SEP #$20
+.10c6	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.10c9					j57:
+.10c9	48		pha		                pha
+.10ca	a9 00		lda #$00	                lda #$00
+.10cc	48		pha		                pha                     ; push the value to the stack
+.10cd	ab		plb		                plb                     ; pull value from stack to data bank register
+.10ce	68		pla		                pla
+.10cf	c2 20		rep #$20	                REP #$20
+.10d1	a5 56		lda $56		    lda SP
+.10d3	38		sec		    sec
+.10d4	e9 02 00	sbc #$0002	    sbc #$02
+.10d7	85 56		sta $56		    sta SP
+.10d9	a5 5c		lda $5c		    lda DI
+.10db	48		pha		                pha
+.10dc	e2 20		sep #$20	                SEP #$20
+.10de	a9 02		lda #$02	                lda #$02
+.10e0	48		pha		                pha                     ; push the value to the stack
+.10e1	ab		plb		                plb                     ; pull value from stack to data bank register
+.10e2	c2 20		rep #$20	                REP #$20
+.10e4	68		pla		                pla
+.10e5	92 56		sta ($56)	    sta (SP)
+.10e7	e2 20		sep #$20	                SEP #$20
+.10e9	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.10ec					j58:
+.10ec	c2 20		rep #$20	                REP #$20
+.10ee	48		pha		                pha
+.10ef	e2 20		sep #$20	                SEP #$20
+.10f1	a9 02		lda #$02	                lda #$02
+.10f3	48		pha		                pha                     ; push the value to the stack
+.10f4	ab		plb		                plb                     ; pull value from stack to data bank register
+.10f5	c2 20		rep #$20	                REP #$20
+.10f7	68		pla		                pla
+.10f8	b2 56		lda ($56)	    lda (SP)
+.10fa	48		pha		                pha
+.10fb	e2 20		sep #$20	                SEP #$20
+.10fd	a9 00		lda #$00	                lda #$00
+.10ff	48		pha		                pha                     ; push the value to the stack
+.1100	ab		plb		                plb                     ; pull value from stack to data bank register
+.1101	c2 20		rep #$20	                REP #$20
+.1103	68		pla		                pla
+.1104	85 42		sta $42		    sta AX
+.1106	a5 56		lda $56		    lda SP
+.1108	18		clc		    clc
+.1109	69 02 00	adc #$0002	    adc #$02
+.110c	85 56		sta $56		    sta SP
+.110e	e2 20		sep #$20	                SEP #$20
+.1110	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1113					j59:
+.1113	c2 20		rep #$20	                REP #$20
+.1115	48		pha		                pha
+.1116	e2 20		sep #$20	                SEP #$20
+.1118	a9 02		lda #$02	                lda #$02
+.111a	48		pha		                pha                     ; push the value to the stack
+.111b	ab		plb		                plb                     ; pull value from stack to data bank register
+.111c	c2 20		rep #$20	                REP #$20
+.111e	68		pla		                pla
+.111f	b2 56		lda ($56)	    lda (SP)
+.1121	48		pha		                pha
+.1122	e2 20		sep #$20	                SEP #$20
+.1124	a9 00		lda #$00	                lda #$00
+.1126	48		pha		                pha                     ; push the value to the stack
+.1127	ab		plb		                plb                     ; pull value from stack to data bank register
+.1128	c2 20		rep #$20	                REP #$20
+.112a	68		pla		                pla
+.112b	85 46		sta $46		    sta CX
+.112d	a5 56		lda $56		    lda SP
+.112f	18		clc		    clc
+.1130	69 02 00	adc #$0002	    adc #$02
+.1133	85 56		sta $56		    sta SP
+.1135	e2 20		sep #$20	                SEP #$20
+.1137	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.113a					j5a:
+.113a	c2 20		rep #$20	                REP #$20
+.113c	48		pha		                pha
+.113d	e2 20		sep #$20	                SEP #$20
+.113f	a9 02		lda #$02	                lda #$02
+.1141	48		pha		                pha                     ; push the value to the stack
+.1142	ab		plb		                plb                     ; pull value from stack to data bank register
+.1143	c2 20		rep #$20	                REP #$20
+.1145	68		pla		                pla
+.1146	b2 56		lda ($56)	    lda (SP)
+.1148	48		pha		                pha
+.1149	e2 20		sep #$20	                SEP #$20
+.114b	a9 00		lda #$00	                lda #$00
+.114d	48		pha		                pha                     ; push the value to the stack
+.114e	ab		plb		                plb                     ; pull value from stack to data bank register
+.114f	c2 20		rep #$20	                REP #$20
+.1151	68		pla		                pla
+.1152	85 48		sta $48		    sta DX
+.1154	a5 56		lda $56		    lda SP
+.1156	18		clc		    clc
+.1157	69 02 00	adc #$0002	    adc #$02
+.115a	85 56		sta $56		    sta SP
+.115c	e2 20		sep #$20	                SEP #$20
+.115e	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1161					j5b:
+.1161	c2 20		rep #$20	                REP #$20
+.1163	48		pha		                pha
+.1164	e2 20		sep #$20	                SEP #$20
+.1166	a9 02		lda #$02	                lda #$02
+.1168	48		pha		                pha                     ; push the value to the stack
+.1169	ab		plb		                plb                     ; pull value from stack to data bank register
+.116a	c2 20		rep #$20	                REP #$20
+.116c	68		pla		                pla
+.116d	b2 56		lda ($56)	    lda (SP)
+.116f	48		pha		                pha
+.1170	e2 20		sep #$20	                SEP #$20
+.1172	a9 00		lda #$00	                lda #$00
+.1174	48		pha		                pha                     ; push the value to the stack
+.1175	ab		plb		                plb                     ; pull value from stack to data bank register
+.1176	c2 20		rep #$20	                REP #$20
+.1178	68		pla		                pla
+.1179	85 44		sta $44		    sta BX
+.117b	a5 56		lda $56		    lda SP
+.117d	18		clc		    clc
+.117e	69 02 00	adc #$0002	    adc #$02
+.1181	85 56		sta $56		    sta SP
+.1183	e2 20		sep #$20	                SEP #$20
+.1185	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1188					j5c:
+.1188	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.118b					j5d:
+.118b	c2 20		rep #$20	                REP #$20
+.118d	48		pha		                pha
+.118e	e2 20		sep #$20	                SEP #$20
+.1190	a9 02		lda #$02	                lda #$02
+.1192	48		pha		                pha                     ; push the value to the stack
+.1193	ab		plb		                plb                     ; pull value from stack to data bank register
+.1194	c2 20		rep #$20	                REP #$20
+.1196	68		pla		                pla
+.1197	b2 56		lda ($56)	    lda (SP)
+.1199	48		pha		                pha
+.119a	e2 20		sep #$20	                SEP #$20
+.119c	a9 00		lda #$00	                lda #$00
+.119e	48		pha		                pha                     ; push the value to the stack
+.119f	ab		plb		                plb                     ; pull value from stack to data bank register
+.11a0	c2 20		rep #$20	                REP #$20
+.11a2	68		pla		                pla
+.11a3	85 58		sta $58		    sta BP
+.11a5	a5 56		lda $56		    lda SP
+.11a7	18		clc		    clc
+.11a8	69 02 00	adc #$0002	    adc #$02
+.11ab	85 56		sta $56		    sta SP
+.11ad	e2 20		sep #$20	                SEP #$20
+.11af	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.11b2					j5e:
+.11b2	c2 20		rep #$20	                REP #$20
+.11b4	48		pha		                pha
+.11b5	e2 20		sep #$20	                SEP #$20
+.11b7	a9 02		lda #$02	                lda #$02
+.11b9	48		pha		                pha                     ; push the value to the stack
+.11ba	ab		plb		                plb                     ; pull value from stack to data bank register
+.11bb	c2 20		rep #$20	                REP #$20
+.11bd	68		pla		                pla
+.11be	b2 56		lda ($56)	    lda (SP)
+.11c0	48		pha		                pha
+.11c1	e2 20		sep #$20	                SEP #$20
+.11c3	a9 00		lda #$00	                lda #$00
+.11c5	48		pha		                pha                     ; push the value to the stack
+.11c6	ab		plb		                plb                     ; pull value from stack to data bank register
+.11c7	c2 20		rep #$20	                REP #$20
+.11c9	68		pla		                pla
+.11ca	85 5a		sta $5a		    sta SI
+.11cc	a5 56		lda $56		    lda SP
+.11ce	18		clc		    clc
+.11cf	69 02 00	adc #$0002	    adc #$02
+.11d2	85 56		sta $56		    sta SP
+.11d4	e2 20		sep #$20	                SEP #$20
+.11d6	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.11d9					j5f:
+.11d9	c2 20		rep #$20	                REP #$20
+.11db	48		pha		                pha
+.11dc	e2 20		sep #$20	                SEP #$20
+.11de	a9 02		lda #$02	                lda #$02
+.11e0	48		pha		                pha                     ; push the value to the stack
+.11e1	ab		plb		                plb                     ; pull value from stack to data bank register
+.11e2	c2 20		rep #$20	                REP #$20
+.11e4	68		pla		                pla
+.11e5	b2 56		lda ($56)	    lda (SP)
+.11e7	48		pha		                pha
+.11e8	e2 20		sep #$20	                SEP #$20
+.11ea	a9 00		lda #$00	                lda #$00
+.11ec	48		pha		                pha                     ; push the value to the stack
+.11ed	ab		plb		                plb                     ; pull value from stack to data bank register
+.11ee	c2 20		rep #$20	                REP #$20
+.11f0	68		pla		                pla
+.11f1	85 5c		sta $5c		    sta DI
+.11f3	a5 56		lda $56		    lda SP
+.11f5	18		clc		    clc
+.11f6	69 02 00	adc #$0002	    adc #$02
+.11f9	85 56		sta $56		    sta SP
+.11fb	e2 20		sep #$20	                SEP #$20
+.11fd	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1200					j60:
+.1200	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1203					j61:
+.1203	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1206					j62:
+.1206	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1209					j63:
+.1209	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.120c					j64:
+.120c	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.120f					j65:
+.120f	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1212					j66:
+.1212	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1215					j67:
+.1215	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1218					j68:
+.1218	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.121b					j69:
+.121b	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.121e					j6a:
+.121e	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1221					j6b:
+.1221	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1224					j6c:
+.1224	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1227					j6d:
+.1227	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.122a					j6e:
+.122a	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.122d					j6f:
+.122d	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1230					j70:
+.1230	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1233					j71:
+.1233	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1236					j72:
+.1236	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1239					j73:
+.1239	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.123c					j74:
+.123c	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.123f					j75:
+.123f	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1242					j76:
+.1242	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1245					j77:
+.1245	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1248					j78:
+.1248	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.124b					j79:
+.124b	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.124e					j7a:
+.124e	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1251					j7b:
+.1251	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1254					j7c:
+.1254	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1257					j7d:
+.1257	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.125a					j7e:
+.125a	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.125d					j7f:
+.125d	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1260					j80:
+.1260	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1263					j81:
+.1263	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1266					j82:
+.1266	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1269					j83:
+.1269	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.126c					j84:
+.126c	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.126f					j85:
+.126f	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1272					j86:
+.1272	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1275					j87:
+.1275	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1278					j88:
+.1278	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.127b					j89:
+.127b	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.127e	c9 c0		cmp #$c0	    cmp #$c0
+.1280	d0 11		bne $1293	    bne +
+.1282	48		pha		                pha
+.1283	a9 00		lda #$00	                lda #$00
+.1285	48		pha		                pha                     ; push the value to the stack
+.1286	ab		plb		                plb                     ; pull value from stack to data bank register
+.1287	68		pla		                pla
+.1288	c2 20		rep #$20	                REP #$20
+.128a	a5 42		lda $42		        lda AX
+.128c	85 42		sta $42		        sta AX
+.128e	e2 20		sep #$20	                SEP #$20
+.1290	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.1293	c9 d8		cmp #$d8	+   cmp #$d8
+.1295	d0 11		bne $12a8	    bne +
+.1297	48		pha		                pha
+.1298	a9 00		lda #$00	                lda #$00
+.129a	48		pha		                pha                     ; push the value to the stack
+.129b	ab		plb		                plb                     ; pull value from stack to data bank register
+.129c	68		pla		                pla
+.129d	c2 20		rep #$20	                REP #$20
+.129f	a5 44		lda $44		        lda BX
+.12a1	85 42		sta $42		        sta AX
+.12a3	e2 20		sep #$20	                SEP #$20
+.12a5	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.12a8	c9 c8		cmp #$c8	+   cmp #$c8
+.12aa	d0 11		bne $12bd	    bne +
+.12ac	48		pha		                pha
+.12ad	a9 00		lda #$00	                lda #$00
+.12af	48		pha		                pha                     ; push the value to the stack
+.12b0	ab		plb		                plb                     ; pull value from stack to data bank register
+.12b1	68		pla		                pla
+.12b2	c2 20		rep #$20	                REP #$20
+.12b4	a5 46		lda $46		        lda CX
+.12b6	85 42		sta $42		        sta AX
+.12b8	e2 20		sep #$20	                SEP #$20
+.12ba	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.12bd	c9 d0		cmp #$d0	+   cmp #$d0
+.12bf	d0 11		bne $12d2	    bne +
+.12c1	48		pha		                pha
+.12c2	a9 00		lda #$00	                lda #$00
+.12c4	48		pha		                pha                     ; push the value to the stack
+.12c5	ab		plb		                plb                     ; pull value from stack to data bank register
+.12c6	68		pla		                pla
+.12c7	c2 20		rep #$20	                REP #$20
+.12c9	a5 48		lda $48		        lda DX
+.12cb	85 42		sta $42		        sta AX
+.12cd	e2 20		sep #$20	                SEP #$20
+.12cf	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.12d2	c9 c3		cmp #$c3	+   cmp #$c3
+.12d4	d0 11		bne $12e7	    bne +
+.12d6	48		pha		                pha
+.12d7	a9 00		lda #$00	                lda #$00
+.12d9	48		pha		                pha                     ; push the value to the stack
+.12da	ab		plb		                plb                     ; pull value from stack to data bank register
+.12db	68		pla		                pla
+.12dc	c2 20		rep #$20	                REP #$20
+.12de	a5 42		lda $42		        lda AX
+.12e0	85 44		sta $44		        sta BX
+.12e2	e2 20		sep #$20	                SEP #$20
+.12e4	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.12e7	c9 db		cmp #$db	+   cmp #$db
+.12e9	d0 11		bne $12fc	    bne +
+.12eb	48		pha		                pha
+.12ec	a9 00		lda #$00	                lda #$00
+.12ee	48		pha		                pha                     ; push the value to the stack
+.12ef	ab		plb		                plb                     ; pull value from stack to data bank register
+.12f0	68		pla		                pla
+.12f1	c2 20		rep #$20	                REP #$20
+.12f3	a5 44		lda $44		        lda BX
+.12f5	85 44		sta $44		        sta BX
+.12f7	e2 20		sep #$20	                SEP #$20
+.12f9	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.12fc	c9 cb		cmp #$cb	+   cmp #$cb
+.12fe	d0 11		bne $1311	    bne +
+.1300	48		pha		                pha
+.1301	a9 00		lda #$00	                lda #$00
+.1303	48		pha		                pha                     ; push the value to the stack
+.1304	ab		plb		                plb                     ; pull value from stack to data bank register
+.1305	68		pla		                pla
+.1306	c2 20		rep #$20	                REP #$20
+.1308	a5 46		lda $46		        lda CX
+.130a	85 44		sta $44		        sta BX
+.130c	e2 20		sep #$20	                SEP #$20
+.130e	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.1311	c9 d3		cmp #$d3	+   cmp #$d3
+.1313	d0 11		bne $1326	    bne +
+.1315	48		pha		                pha
+.1316	a9 00		lda #$00	                lda #$00
+.1318	48		pha		                pha                     ; push the value to the stack
+.1319	ab		plb		                plb                     ; pull value from stack to data bank register
+.131a	68		pla		                pla
+.131b	c2 20		rep #$20	                REP #$20
+.131d	a5 48		lda $48		        lda DX
+.131f	85 44		sta $44		        sta BX
+.1321	e2 20		sep #$20	                SEP #$20
+.1323	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.1326	c9 c1		cmp #$c1	+   cmp #$c1
+.1328	d0 11		bne $133b	    bne +
+.132a	48		pha		                pha
+.132b	a9 00		lda #$00	                lda #$00
+.132d	48		pha		                pha                     ; push the value to the stack
+.132e	ab		plb		                plb                     ; pull value from stack to data bank register
+.132f	68		pla		                pla
+.1330	c2 20		rep #$20	                REP #$20
+.1332	a5 42		lda $42		        lda AX
+.1334	85 46		sta $46		        sta CX
+.1336	e2 20		sep #$20	                SEP #$20
+.1338	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.133b	c9 d9		cmp #$d9	+   cmp #$d9
+.133d	d0 11		bne $1350	    bne +
+.133f	48		pha		                pha
+.1340	a9 00		lda #$00	                lda #$00
+.1342	48		pha		                pha                     ; push the value to the stack
+.1343	ab		plb		                plb                     ; pull value from stack to data bank register
+.1344	68		pla		                pla
+.1345	c2 20		rep #$20	                REP #$20
+.1347	a5 44		lda $44		        lda BX
+.1349	85 46		sta $46		        sta CX
+.134b	e2 20		sep #$20	                SEP #$20
+.134d	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.1350	c9 c9		cmp #$c9	+   cmp #$c9
+.1352	d0 11		bne $1365	    bne +
+.1354	48		pha		                pha
+.1355	a9 00		lda #$00	                lda #$00
+.1357	48		pha		                pha                     ; push the value to the stack
+.1358	ab		plb		                plb                     ; pull value from stack to data bank register
+.1359	68		pla		                pla
+.135a	c2 20		rep #$20	                REP #$20
+.135c	a5 46		lda $46		        lda CX
+.135e	85 46		sta $46		        sta CX
+.1360	e2 20		sep #$20	                SEP #$20
+.1362	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.1365	c9 d1		cmp #$d1	+   cmp #$d1
+.1367	d0 11		bne $137a	    bne +
+.1369	48		pha		                pha
+.136a	a9 00		lda #$00	                lda #$00
+.136c	48		pha		                pha                     ; push the value to the stack
+.136d	ab		plb		                plb                     ; pull value from stack to data bank register
+.136e	68		pla		                pla
+.136f	c2 20		rep #$20	                REP #$20
+.1371	a5 48		lda $48		        lda DX
+.1373	85 46		sta $46		        sta CX
+.1375	e2 20		sep #$20	                SEP #$20
+.1377	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.137a	c9 c2		cmp #$c2	+   cmp #$c2
+.137c	d0 11		bne $138f	    bne +
+.137e	48		pha		                pha
+.137f	a9 00		lda #$00	                lda #$00
+.1381	48		pha		                pha                     ; push the value to the stack
+.1382	ab		plb		                plb                     ; pull value from stack to data bank register
+.1383	68		pla		                pla
+.1384	c2 20		rep #$20	                REP #$20
+.1386	a5 42		lda $42		        lda AX
+.1388	85 48		sta $48		        sta DX
+.138a	e2 20		sep #$20	                SEP #$20
+.138c	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.138f	c9 da		cmp #$da	+   cmp #$da
+.1391	d0 11		bne $13a4	    bne +
+.1393	48		pha		                pha
+.1394	a9 00		lda #$00	                lda #$00
+.1396	48		pha		                pha                     ; push the value to the stack
+.1397	ab		plb		                plb                     ; pull value from stack to data bank register
+.1398	68		pla		                pla
+.1399	c2 20		rep #$20	                REP #$20
+.139b	a5 44		lda $44		        lda BX
+.139d	85 48		sta $48		        sta DX
+.139f	e2 20		sep #$20	                SEP #$20
+.13a1	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.13a4	c9 ca		cmp #$ca	+   cmp #$ca
+.13a6	d0 11		bne $13b9	    bne +
+.13a8	48		pha		                pha
+.13a9	a9 00		lda #$00	                lda #$00
+.13ab	48		pha		                pha                     ; push the value to the stack
+.13ac	ab		plb		                plb                     ; pull value from stack to data bank register
+.13ad	68		pla		                pla
+.13ae	c2 20		rep #$20	                REP #$20
+.13b0	a5 46		lda $46		        lda CX
+.13b2	85 48		sta $48		        sta DX
+.13b4	e2 20		sep #$20	                SEP #$20
+.13b6	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.13b9	c9 d2		cmp #$d2	+   cmp #$d2
+.13bb	d0 11		bne $13ce	    bne +
+.13bd	48		pha		                pha
+.13be	a9 00		lda #$00	                lda #$00
+.13c0	48		pha		                pha                     ; push the value to the stack
+.13c1	ab		plb		                plb                     ; pull value from stack to data bank register
+.13c2	68		pla		                pla
+.13c3	c2 20		rep #$20	                REP #$20
+.13c5	a5 48		lda $48		        lda DX
+.13c7	85 48		sta $48		        sta DX
+.13c9	e2 20		sep #$20	                SEP #$20
+.13cb	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.13ce	4c 91 0a	jmp $0a91	+    jmp MAINLOOP_END
+.13d1					j8a:
+.13d1	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13d4					j8b:
+.13d4	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13d7					j8c:
+.13d7	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13da					j8d:
+.13da	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13dd					j8e:
+.13dd	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13e0					j8f:
+.13e0	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13e3					j90:
+.13e3	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13e6					j91:
+.13e6	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13e9					j92:
+.13e9	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13ec					j93:
+.13ec	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13ef					j94:
+.13ef	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13f2					j95:
+.13f2	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13f5					j96:
+.13f5	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13f8					j97:
+.13f8	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13fb					j98:
+.13fb	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.13fe					j99:
+.13fe	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1401					j9a:
+.1401	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1404					j9b:
+.1404	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1407					j9c:
+.1407	48		pha		                pha
+.1408	a9 00		lda #$00	                lda #$00
+.140a	48		pha		                pha                     ; push the value to the stack
+.140b	ab		plb		                plb                     ; pull value from stack to data bank register
+.140c	68		pla		                pla
+.140d	c2 20		rep #$20	                REP #$20
+.140f	a5 56		lda $56		    lda SP
+.1411	38		sec		    sec
+.1412	e9 02 00	sbc #$0002	    sbc #$02
+.1415	85 56		sta $56		    sta SP
+.1417	a5 54		lda $54		    lda FR
+.1419	48		pha		                pha
+.141a	e2 20		sep #$20	                SEP #$20
+.141c	a9 02		lda #$02	                lda #$02
+.141e	48		pha		                pha                     ; push the value to the stack
+.141f	ab		plb		                plb                     ; pull value from stack to data bank register
+.1420	c2 20		rep #$20	                REP #$20
+.1422	68		pla		                pla
+.1423	92 56		sta ($56)	    sta (SP)
+.1425	e2 20		sep #$20	                SEP #$20
+.1427	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.142a					j9d:
+.142a	c2 20		rep #$20	                REP #$20
+.142c	48		pha		                pha
+.142d	e2 20		sep #$20	                SEP #$20
+.142f	a9 02		lda #$02	                lda #$02
+.1431	48		pha		                pha                     ; push the value to the stack
+.1432	ab		plb		                plb                     ; pull value from stack to data bank register
+.1433	c2 20		rep #$20	                REP #$20
+.1435	68		pla		                pla
+.1436	b2 56		lda ($56)	    lda (SP)
+.1438	48		pha		                pha
+.1439	e2 20		sep #$20	                SEP #$20
+.143b	a9 00		lda #$00	                lda #$00
+.143d	48		pha		                pha                     ; push the value to the stack
+.143e	ab		plb		                plb                     ; pull value from stack to data bank register
+.143f	c2 20		rep #$20	                REP #$20
+.1441	68		pla		                pla
+.1442	85 54		sta $54		    sta FR
+.1444	a5 56		lda $56		    lda SP
+.1446	18		clc		    clc
+.1447	69 02 00	adc #$0002	    adc #$02
+.144a	85 56		sta $56		    sta SP
+.144c	e2 20		sep #$20	                SEP #$20
+.144e	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1451					j9e:
+.1451	48		pha		                pha
+.1452	a9 00		lda #$00	                lda #$00
+.1454	48		pha		                pha                     ; push the value to the stack
+.1455	ab		plb		                plb                     ; pull value from stack to data bank register
+.1456	68		pla		                pla
+.1457	a5 43		lda $43		    lda AH
+.1459	85 55		sta $55		    sta FRL
+.145b	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.145e					j9f:
+.145e	48		pha		                pha
+.145f	a9 00		lda #$00	                lda #$00
+.1461	48		pha		                pha                     ; push the value to the stack
+.1462	ab		plb		                plb                     ; pull value from stack to data bank register
+.1463	68		pla		                pla
+.1464	85 55		sta $55		    sta FRL
+.1466	a5 43		lda $43		    lda AH
+.1468	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.146b					ja0:
+.146b	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.146e					ja1:
+.146e	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1471					ja2:
+.1471	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1474					ja3:
+.1474	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1477					ja4:
+.1477	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.147a					ja5:
+.147a	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.147d					ja6:
+.147d	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1480					ja7:
+.1480	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1483					ja8:
+.1483	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1486					ja9:
+.1486	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1489					jaa:
+.1489	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.148c					jab:
+.148c	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.148f					jac:
+.148f	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1492					jad:
+.1492	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1495					jae:
+.1495	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1498					jaf:
+.1498	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.149b					jb0:
+.149b	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.149e	48		pha		                pha
+.149f	a9 00		lda #$00	                lda #$00
+.14a1	48		pha		                pha                     ; push the value to the stack
+.14a2	ab		plb		                plb                     ; pull value from stack to data bank register
+.14a3	68		pla		                pla
+.14a4	85 42		sta $42		    sta AL
+.14a6	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.14a9					jb1:
+.14a9	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.14ac	48		pha		                pha
+.14ad	a9 00		lda #$00	                lda #$00
+.14af	48		pha		                pha                     ; push the value to the stack
+.14b0	ab		plb		                plb                     ; pull value from stack to data bank register
+.14b1	68		pla		                pla
+.14b2	85 46		sta $46		    sta CL
+.14b4	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.14b7					jb2:
+.14b7	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.14ba	48		pha		                pha
+.14bb	a9 00		lda #$00	                lda #$00
+.14bd	48		pha		                pha                     ; push the value to the stack
+.14be	ab		plb		                plb                     ; pull value from stack to data bank register
+.14bf	68		pla		                pla
+.14c0	85 48		sta $48		    sta DL      ; store it
+.14c2	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.14c5					jb3:
+.14c5	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.14c8	48		pha		                pha
+.14c9	a9 00		lda #$00	                lda #$00
+.14cb	48		pha		                pha                     ; push the value to the stack
+.14cc	ab		plb		                plb                     ; pull value from stack to data bank register
+.14cd	68		pla		                pla
+.14ce	85 44		sta $44		    sta BL
+.14d0	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.14d3					jb4:
+.14d3	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.14d6	48		pha		                pha
+.14d7	a9 00		lda #$00	                lda #$00
+.14d9	48		pha		                pha                     ; push the value to the stack
+.14da	ab		plb		                plb                     ; pull value from stack to data bank register
+.14db	68		pla		                pla
+.14dc	85 43		sta $43		    sta AH      ; store it
+.14de	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.14e1					jb5:
+.14e1	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.14e4	48		pha		                pha
+.14e5	a9 00		lda #$00	                lda #$00
+.14e7	48		pha		                pha                     ; push the value to the stack
+.14e8	ab		plb		                plb                     ; pull value from stack to data bank register
+.14e9	68		pla		                pla
+.14ea	85 47		sta $47		    sta CH
+.14ec	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.14ef					jb6:
+.14ef	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.14f2	48		pha		                pha
+.14f3	a9 00		lda #$00	                lda #$00
+.14f5	48		pha		                pha                     ; push the value to the stack
+.14f6	ab		plb		                plb                     ; pull value from stack to data bank register
+.14f7	68		pla		                pla
+.14f8	85 49		sta $49		    sta DH
+.14fa	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.14fd					jb7:
+.14fd	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.1500	48		pha		                pha
+.1501	a9 00		lda #$00	                lda #$00
+.1503	48		pha		                pha                     ; push the value to the stack
+.1504	ab		plb		                plb                     ; pull value from stack to data bank register
+.1505	68		pla		                pla
+.1506	85 45		sta $45		    sta BH
+.1508	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.150b					jb8:
+.150b	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.150e	48		pha		                pha
+.150f	a9 00		lda #$00	                lda #$00
+.1511	48		pha		                pha                     ; push the value to the stack
+.1512	ab		plb		                plb                     ; pull value from stack to data bank register
+.1513	68		pla		                pla
+.1514	85 42		sta $42		    sta AL
+.1516	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.1519	48		pha		                pha
+.151a	a9 00		lda #$00	                lda #$00
+.151c	48		pha		                pha                     ; push the value to the stack
+.151d	ab		plb		                plb                     ; pull value from stack to data bank register
+.151e	68		pla		                pla
+.151f	85 43		sta $43		    sta AH
+.1521	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1524					jb9:
+.1524	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.1527	48		pha		                pha
+.1528	a9 00		lda #$00	                lda #$00
+.152a	48		pha		                pha                     ; push the value to the stack
+.152b	ab		plb		                plb                     ; pull value from stack to data bank register
+.152c	68		pla		                pla
+.152d	85 46		sta $46		    sta CL
+.152f	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.1532	48		pha		                pha
+.1533	a9 00		lda #$00	                lda #$00
+.1535	48		pha		                pha                     ; push the value to the stack
+.1536	ab		plb		                plb                     ; pull value from stack to data bank register
+.1537	68		pla		                pla
+.1538	85 47		sta $47		    sta CH
+.153a	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.153d					jba:
+.153d	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.1540	48		pha		                pha
+.1541	a9 00		lda #$00	                lda #$00
+.1543	48		pha		                pha                     ; push the value to the stack
+.1544	ab		plb		                plb                     ; pull value from stack to data bank register
+.1545	68		pla		                pla
+.1546	85 48		sta $48		    sta DL
+.1548	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.154b	48		pha		                pha
+.154c	a9 00		lda #$00	                lda #$00
+.154e	48		pha		                pha                     ; push the value to the stack
+.154f	ab		plb		                plb                     ; pull value from stack to data bank register
+.1550	68		pla		                pla
+.1551	85 49		sta $49		    sta DH
+.1553	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1556					jbb:
+.1556	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.1559	48		pha		                pha
+.155a	a9 00		lda #$00	                lda #$00
+.155c	48		pha		                pha                     ; push the value to the stack
+.155d	ab		plb		                plb                     ; pull value from stack to data bank register
+.155e	68		pla		                pla
+.155f	85 44		sta $44		    sta BL
+.1561	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.1564	48		pha		                pha
+.1565	a9 00		lda #$00	                lda #$00
+.1567	48		pha		                pha                     ; push the value to the stack
+.1568	ab		plb		                plb                     ; pull value from stack to data bank register
+.1569	68		pla		                pla
+.156a	85 45		sta $45		    sta BH
+.156c	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.156f					jbc:
+.156f	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1572					jbd:
+.1572	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1575					jbe:
+.1575	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1578					jbf:
+.1578	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.157b					jc0:
+.157b	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.157e					jc1:
+.157e	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1581					jc2:
+.1581	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1584					jc3:
+.1584	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1587					jc4:
+.1587	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.158a					jc5:
+.158a	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.158d					jc6:
+.158d	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1590					jc7:
+.1590	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1593					jc8:
+.1593	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1596					jc9:
+.1596	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1599					jca:
+.1599	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.159c					jcb:
+.159c	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.159f					jcc:
+.159f	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.15a2					jcd:
+.15a2	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.15a5	c9 21		cmp #$21	    cmp #$21
+.15a7	f0 07		beq $15b0	    beq jcd_putc
+.15a9	c9 20		cmp #$20	    cmp #$20
+.15ab	f0 35		beq $15e2	    beq jcd_exit
+.15ad	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.15b0					    jcd_putc:
+.15b0	48		pha		                pha
+.15b1	a9 00		lda #$00	                lda #$00
+.15b3	48		pha		                pha                     ; push the value to the stack
+.15b4	ab		plb		                plb                     ; pull value from stack to data bank register
+.15b5	68		pla		                pla
+.15b6	a5 43		lda $43		        lda AH
+.15b8	c9 09		cmp #$09	        cmp #$09
+.15ba	d0 1e		bne $15da	        bne +
+.15bc	a0 00		ldy #$00	            ldy #$00
+.15be					            pr_string_loop:
+.15be	48		pha		                pha
+.15bf	a9 02		lda #$02	                lda #$02
+.15c1	48		pha		                pha                     ; push the value to the stack
+.15c2	ab		plb		                plb                     ; pull value from stack to data bank register
+.15c3	68		pla		                pla
+.15c4	b1 48		lda ($48),y	                lda (DX),y
+.15c6	c9 24		cmp #$24	                cmp #'$'
+.15c8	f0 0d		beq $15d7	                beq pr_string_done
+.15ca	48		pha		                pha
+.15cb	a9 00		lda #$00	                lda #$00
+.15cd	48		pha		                pha                     ; push the value to the stack
+.15ce	ab		plb		                plb                     ; pull value from stack to data bank register
+.15cf	68		pla		                pla
+.15d0	20 d2 ff	jsr $ffd2	                jsr $FFD2
+.15d3	c8		iny		                iny
+.15d4	4c be 15	jmp $15be	                jmp pr_string_loop
+.15d7					            pr_string_done:
+.15d7	4c 91 0a	jmp $0a91	                jmp MAINLOOP_END
+.15da	a5 48		lda $48		+       lda DL
+.15dc	20 d2 ff	jsr $ffd2	        jsr $FFD2
+.15df	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.15e2					    jcd_exit:
+.15e2	4c 97 0a	jmp $0a97	        jmp EXIT
+.15e5					jce:
+.15e5	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.15e8					jcf:
+.15e8	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.15eb					jd0:
+.15eb	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.15ee					jd1:
+.15ee	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.15f1					jd2:
+.15f1	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.15f4					jd3:
+.15f4	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.15f7					jd4:
+.15f7	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.15fa					jd5:
+.15fa	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.15fd					jd6:
+.15fd	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1600					jd7:
+.1600	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1603					jd8:
+.1603	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1606					jd9:
+.1606	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1609					jda:
+.1609	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.160c					jdb:
+.160c	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.160f					jdc:
+.160f	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1612					jdd:
+.1612	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1615					jde:
+.1615	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1618					jdf:
+.1618	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.161b					je0:
+.161b	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.161e					je1:
+.161e	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1621					je2:
+.1621	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.1624	48		pha		    pha
+.1625	48		pha		                pha
+.1626	a9 00		lda #$00	                lda #$00
+.1628	48		pha		                pha                     ; push the value to the stack
+.1629	ab		plb		                plb                     ; pull value from stack to data bank register
+.162a	68		pla		                pla
+.162b	c2 20		rep #$20	                REP #$20
+.162d	a5 46		lda $46		    lda CX
+.162f	f0 2b		beq $165c	    beq je2_loopdone
+.1631	c6 46		dec $46		    dec CX
+.1633	e2 20		sep #$20	                SEP #$20
+.1635	68		pla		    pla
+.1636	c9 80		cmp #$80	    cmp #$80
+.1638	b0 10		bcs $164a	    bcs je2_back
+.163a					    je2_forward:
+.163a	85 5e		sta $5e		        sta TMP1
+.163c	c2 20		rep #$20	                REP #$20
+.163e	a5 52		lda $52		        lda IP
+.1640	18		clc		        clc
+.1641	65 5e		adc $5e		        adc TMP1
+.1643	85 52		sta $52		        sta IP
+.1645	e2 20		sep #$20	                SEP #$20
+.1647	4c 76 0a	jmp $0a76	        jmp MAINLOOP
+.164a					    je2_back:
+.164a	49 ff		eor #$ff	        eor #$ff
+.164c	85 5e		sta $5e		        sta TMP1
+.164e	c2 20		rep #$20	                REP #$20
+.1650	a5 52		lda $52		        lda IP
+.1652	38		sec		        sec
+.1653	e5 5e		sbc $5e		        sbc TMP1
+.1655	85 52		sta $52		        sta IP
+.1657	e2 20		sep #$20	                SEP #$20
+.1659	4c 76 0a	jmp $0a76	        jmp MAINLOOP
+.165c					    je2_loopdone:
+.165c	e2 20		sep #$20	                SEP #$20
+.165e	68		pla		        pla
+.165f	4c 76 0a	jmp $0a76	        jmp MAINLOOP
+.1662					je3:
+.1662	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1665					je4:
+.1665	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1668					je5:
+.1668	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.166b					je6:
+.166b	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.166e					je7:
+.166e	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1671					je8:
+.1671	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1674					je9:
+.1674	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1677					jea:
+.1677	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.167a					jeb:
+.167a	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.167d	48		pha		                pha
+.167e	a9 00		lda #$00	                lda #$00
+.1680	48		pha		                pha                     ; push the value to the stack
+.1681	ab		plb		                plb                     ; pull value from stack to data bank register
+.1682	68		pla		                pla
+.1683	c9 80		cmp #$80	    cmp #$80
+.1685	b0 10		bcs $1697	    bcs jeb_back
+.1687					    jeb_forward:
+.1687	85 5e		sta $5e		        sta TMP1
+.1689	c2 20		rep #$20	                REP #$20
+.168b	a5 52		lda $52		        lda IP
+.168d	18		clc		        clc
+.168e	65 5e		adc $5e		        adc TMP1
+.1690	85 52		sta $52		        sta IP
+.1692	e2 20		sep #$20	                SEP #$20
+.1694	4c 76 0a	jmp $0a76	        jmp MAINLOOP
+.1697					    jeb_back:
+.1697	49 ff		eor #$ff	        eor #$ff
+.1699	85 5e		sta $5e		        sta TMP1
+.169b	c2 20		rep #$20	                REP #$20
+.169d	a5 52		lda $52		        lda IP
+.169f	38		sec		        sec
+.16a0	e5 5e		sbc $5e		        sbc TMP1
+.16a2	85 52		sta $52		        sta IP
+.16a4	e2 20		sep #$20	                SEP #$20
+.16a6	4c 76 0a	jmp $0a76	        jmp MAINLOOP
+.16a9					jec:
+.16a9	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16ac					jed:
+.16ac	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16af					jee:
+.16af	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16b2					jef:
+.16b2	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16b5					jf0:
+.16b5	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16b8					jf1:
+.16b8	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16bb					jf2:
+.16bb	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16be					jf3:
+.16be	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16c1					jf4:
+.16c1	4c c1 16	jmp $16c1	    jmp jf4
+.16c4					jf5:
+.16c4	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16c7					jf6:
+.16c7	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16ca					jf7:
+.16ca	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16cd					jf8:
+.16cd	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16d0					jf9:
+.16d0	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16d3					jfa:
+.16d3	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16d6					jfb:
+.16d6	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16d9					jfc:
+.16d9	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16dc					jfd:
+.16dc	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.16df					jfe:
+.16df	20 fa 0b	jsr $0bfa	    jsr GETNEXT
+.16e2	c9 c0		cmp #$c0	    cmp #$c0
+.16e4	f0 1f		beq $1705	    beq jfe_al
+.16e6	c9 c4		cmp #$c4	    cmp #$c4
+.16e8	f0 26		beq $1710	    beq jfe_ah
+.16ea	c9 c3		cmp #$c3	    cmp #$c3
+.16ec	f0 2d		beq $171b	    beq jfe_bl
+.16ee	c9 c7		cmp #$c7	    cmp #$c7
+.16f0	f0 34		beq $1726	    beq jfe_bh
+.16f2	c9 c1		cmp #$c1	    cmp #$c1
+.16f4	f0 3b		beq $1731	    beq jfe_cl
+.16f6	c9 c5		cmp #$c5	    cmp #$c5
+.16f8	f0 42		beq $173c	    beq jfe_ch
+.16fa	c9 c2		cmp #$c2	    cmp #$c2
+.16fc	f0 49		beq $1747	    beq jfe_dl
+.16fe	c9 c6		cmp #$c6	    cmp #$c6
+.1700	f0 50		beq $1752	    beq jfe_dh
+.1702	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
+.1705					    jfe_al:
+.1705	48		pha		                pha
+.1706	a9 00		lda #$00	                lda #$00
+.1708	48		pha		                pha                     ; push the value to the stack
+.1709	ab		plb		                plb                     ; pull value from stack to data bank register
+.170a	68		pla		                pla
+.170b	e6 42		inc $42		        inc AL
+.170d	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.1710					    jfe_ah:
+.1710	48		pha		                pha
+.1711	a9 00		lda #$00	                lda #$00
+.1713	48		pha		                pha                     ; push the value to the stack
+.1714	ab		plb		                plb                     ; pull value from stack to data bank register
+.1715	68		pla		                pla
+.1716	e6 43		inc $43		        inc AH
+.1718	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.171b					    jfe_bl:
+.171b	48		pha		                pha
+.171c	a9 00		lda #$00	                lda #$00
+.171e	48		pha		                pha                     ; push the value to the stack
+.171f	ab		plb		                plb                     ; pull value from stack to data bank register
+.1720	68		pla		                pla
+.1721	e6 44		inc $44		        inc BL
+.1723	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.1726					    jfe_bh:
+.1726	48		pha		                pha
+.1727	a9 00		lda #$00	                lda #$00
+.1729	48		pha		                pha                     ; push the value to the stack
+.172a	ab		plb		                plb                     ; pull value from stack to data bank register
+.172b	68		pla		                pla
+.172c	e6 45		inc $45		        inc BH
+.172e	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.1731					    jfe_cl:
+.1731	48		pha		                pha
+.1732	a9 00		lda #$00	                lda #$00
+.1734	48		pha		                pha                     ; push the value to the stack
+.1735	ab		plb		                plb                     ; pull value from stack to data bank register
+.1736	68		pla		                pla
+.1737	e6 46		inc $46		        inc CL
+.1739	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.173c					    jfe_ch:
+.173c	48		pha		                pha
+.173d	a9 00		lda #$00	                lda #$00
+.173f	48		pha		                pha                     ; push the value to the stack
+.1740	ab		plb		                plb                     ; pull value from stack to data bank register
+.1741	68		pla		                pla
+.1742	e6 47		inc $47		        inc CH
+.1744	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.1747					    jfe_dl:
+.1747	48		pha		                pha
+.1748	a9 00		lda #$00	                lda #$00
+.174a	48		pha		                pha                     ; push the value to the stack
+.174b	ab		plb		                plb                     ; pull value from stack to data bank register
+.174c	68		pla		                pla
+.174d	e6 48		inc $48		        inc DL
+.174f	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.1752					    jfe_dh:
+.1752	48		pha		                pha
+.1753	a9 00		lda #$00	                lda #$00
+.1755	48		pha		                pha                     ; push the value to the stack
+.1756	ab		plb		                plb                     ; pull value from stack to data bank register
+.1757	68		pla		                pla
+.1758	e6 49		inc $49		        inc DH
+.175a	4c 91 0a	jmp $0a91	        jmp MAINLOOP_END
+.175d					jff:
+.175d	4c 91 0a	jmp $0a91	    jmp MAINLOOP_END
 
 ;******  End of listing

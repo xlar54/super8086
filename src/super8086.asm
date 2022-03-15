@@ -35,6 +35,8 @@ SS  = $50   ; stack segment reg
 
 IP  = $52   ; instruction pointer
 FR  = $54   ; flags register
+FRH = $54
+FRL = $55
 
 ;index registers
 SP  = $56   ; stack pointer reg
@@ -76,10 +78,25 @@ start:
     ; initialize the cpu
     .native
     
-    ; set instruction pointer to $020100
+    ; init registers
     .rega16
+    stz AX
+    stz BX
+    stz CX
+    stz DX
+    stz CS
+    stz DS
+    stz ES
+    stz SS
+    stz FR
+
+    ; set instruction pointer to $020100
     lda #$0100
     sta IP
+ 
+    ; set stack to $FFFF
+    lda #$FFFF
+    sta SP
     .regaxy8
 
     ; push test prg
@@ -89,13 +106,24 @@ LOAD:
     .setdatabank $02
     sta (IP),y
     iny
-    cpy #$08
+    cpy #$2a
     beq MAINLOOP
     .setdatabank $00
     jmp LOAD
 
 X86PRG:
-    .byte $b2, $58, $b4, $02, $cd, $21, $eb, $f8, $00
+    .byte $ba, $09, $01 ; mov dX, 0109
+    .byte $52
+    .byte $b4, $09      ; mov ah, 09
+    .byte $cd, $21      ; int 21
+    .byte $59
+    .byte $cd, $20      ; int 20
+    .text "hello world$"
+    .byte $cd, $20      ; int 21
+    .byte $fe, $c2      ; inc DL
+    .byte $e2, $f8      ; loop 0105
+    
+    .byte $cd, $20      ; int 20
 
     ; main opcode loop
 MAINLOOP:
@@ -117,12 +145,162 @@ MAINLOOP_END:
 EXIT:
     .regaxy8
     .setdatabank $00
-    lda #<msg2      ; print the startup message
+    lda #<txt_ax      ; print the startup message
     sta $fe 
-    lda #>msg2
+    lda #>txt_ax
     sta $ff
     jsr print
+    lda AH
+    jsr prhex
+    lda AL
+    jsr prhex
+    lda #' '
+    jsr $FFD2
+    lda #<txt_bx      ; print the startup message
+    sta $fe 
+    lda #>txt_bx
+    sta $ff
+    jsr print
+    lda BH 
+    jsr prhex
+    lda BL
+    jsr prhex
+    lda #' '
+    jsr $FFD2
+    lda #<txt_cx      ; print the startup message
+    sta $fe 
+    lda #>txt_cx
+    sta $ff
+    jsr print
+    lda CH 
+    jsr prhex
+    lda CL
+    jsr prhex
+    lda #' '
+    jsr $FFD2
+    lda #<txt_dx      ; print the startup message
+    sta $fe 
+    lda #>txt_dx
+    sta $ff
+    jsr print
+    lda DH 
+    jsr prhex
+    lda DL
+    jsr prhex
+    
+    lda #<txt_sp      ; print the startup message
+    sta $fe 
+    lda #>txt_sp
+    sta $ff
+    jsr print
+    lda SP
+    jsr prhex
+    lda SP+1
+    jsr prhex
+    lda #' '
+    jsr $FFD2
+    lda #<txt_bp      ; print the startup message
+    sta $fe 
+    lda #>txt_bp
+    sta $ff
+    jsr print
+    lda BP
+    jsr prhex
+    lda BP+2
+    jsr prhex
+    lda #' '
+    jsr $FFD2
+    lda #<txt_si      ; print the startup message
+    sta $fe 
+    lda #>txt_si
+    sta $ff
+    jsr print
+    lda SI
+    jsr prhex
+    lda SI+2
+    jsr prhex
+    lda #' '
+    jsr $FFD2
+    lda #<txt_di      ; print the startup message
+    sta $fe 
+    lda #>txt_di
+    sta $ff
+    jsr print
+    lda DI
+    jsr prhex
+    lda DI+2
+    jsr prhex
+
+    lda #<txt_ds      ; print the startup message
+    sta $fe 
+    lda #>txt_ds
+    sta $ff
+    jsr print
+    lda DS
+    jsr prhex
+    lda DS+1
+    jsr prhex
+    lda #' '
+    jsr $FFD2
+    lda #<txt_es      ; print the startup message
+    sta $fe 
+    lda #>txt_es
+    sta $ff
+    jsr print
+    lda ES
+    jsr prhex
+    lda ES+2
+    jsr prhex
+    lda #' '
+    jsr $FFD2
+    lda #<txt_ss      ; print the startup message
+    sta $fe 
+    lda #>txt_ss
+    sta $ff
+    jsr print
+    lda SS
+    jsr prhex
+    lda SS+2
+    jsr prhex
+    lda #' '
+    jsr $FFD2
+    lda #<txt_cs      ; print the startup message
+    sta $fe 
+    lda #>txt_cs
+    sta $ff
+    jsr print
+    lda CS
+    jsr prhex
+    lda CS+2
+    jsr prhex
+
+    lda #<txt_ip      ; print the startup message
+    sta $fe 
+    lda #>txt_ip
+    sta $ff
+    jsr print
+    lda IP+1
+    jsr prhex
+    lda IP
+    jsr prhex
+    lda #' '
+    jsr $FFD2
+    lda #<txt_fr      ; print the startup message
+    sta $fe 
+    lda #>txt_fr
+    sta $ff
+    jsr print
+    lda FR
+    jsr prhex
+    lda FR+2
+    jsr prhex
+
     .emulation
+    rts
+
+GETNEXT:
+    jsr INC_IP
+    jsr FETCH_IP
     rts
 
 INC_IP:
@@ -152,11 +330,66 @@ nextch:
     jmp nextch
 +   rts
 
+; output two hex digits for byte
+prhex   
+        .setdatabank $00
+        phx                 ; save x
+        jsr asctwo          ; get hex chars for byte in x (lower) and a (upper)
+        jsr $ffd2          ; output upper nybble
+        txa                 ; transfer lower to a
+        plx                 ; restore x
+        jsr $ffd2          ; output lower nybble
+
+; -----------------------------------------------------------------------------
+; convert byte in a to hex digits
+asctwo  pha                 ; save byte
+        jsr ascii           ; do low nybble
+        tax                 ; save in x
+        pla                 ; restore byte
+        lsr a               ; shift upper nybble down
+        lsr a
+        lsr a
+        lsr a
+
+; convert low nybble in A to hex digit
+ascii   and #$0f            ; clear upper nibble
+        cmp #$0a            ; if less than a, skip next step
+        bcc asc1
+        adc #6              ; skip ascii chars between 9 and a
+asc1    adc #$30            ; add ascii char 0 to value
+        rts
+
 msg1:
     .text $93,$0e,"Super8086 Emulator",$0d,$00
 
-msg2:
-    .text $0d,"Terminated",$0d,$00
+txt_ax:
+    .text $0d,$0d,"ax=",$00
+txt_bx:
+    .text "bx=",$00
+txt_cx
+    .text "cx=",$00
+txt_dx
+    .text "dx=",$00
+txt_sp:
+    .text $0d,"sp=",$00
+txt_bp:
+    .text "bp=",$00
+txt_si
+    .text "si=",$00
+txt_di
+    .text "di=",$00
+txt_ds:
+    .text $0d,"ds=",$00
+txt_es:
+    .text "es=",$00
+txt_ss
+    .text "ss=",$00
+txt_cs
+    .text "cs=",$00
+txt_ip:
+    .text $0d,"ip=",$00
+txt_fr:
+    .text "flags=",$00
 
 ; -------------------------------------------------------
 ; opcode operations
@@ -173,9 +406,29 @@ j04:
     jmp MAINLOOP_END
 j05:
     jmp MAINLOOP_END
-j06:
+j06:                    ; push es
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda ES
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
-j07:
+j07:                    ; pop es
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta ES
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
 j08:
     jmp MAINLOOP_END
@@ -189,9 +442,29 @@ j0c:
     jmp MAINLOOP_END
 j0d:
     jmp MAINLOOP_END
-j0e:
+j0e:                    ; push cs
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda CS
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
-j0f:
+j0f:                    ; pop cs
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta CS
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
 j10:
     jmp MAINLOOP_END
@@ -205,9 +478,29 @@ j14:
     jmp MAINLOOP_END
 j15:
     jmp MAINLOOP_END
-j16:
+j16:                    ; push ss
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda SS
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
-j17:
+j17:                    ; pop ss
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta SS
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
 j18:
     jmp MAINLOOP_END
@@ -221,14 +514,186 @@ j1c:
     jmp MAINLOOP_END
 j1d:
     jmp MAINLOOP_END
-j1e:
+j1e:                    ; push es
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda ES
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
-j1f:
+j1f:                    ; pop ds
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta DS
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
 j20:
     jmp MAINLOOP_END
 j21:
-    jmp MAINLOOP_END
+    jsr GETNEXT
+    .setdatabank $00
+    cmp #$c0
+    beq j21_ax_ax
+    cmp #$d8
+    beq j21_ax_bx
+    cmp #$d8
+    beq j21_ax_cx
+    cmp #$d8
+    beq j21_ax_dx
+    cmp #$d8
+    beq j21_bx_ax
+    cmp #$d8
+    beq j21_bx_bx
+    cmp #$d8
+    beq j21_bx_cx
+    cmp #$d8
+    beq j21_bx_dx
+    jmp j21_cmp2
+
+    j21_ax_ax:
+        .rega16
+        lda AX
+        and AX
+        sta AX
+        .rega8
+        jmp MAINLOOP_END
+    j21_ax_bx:
+        .rega16
+        lda BX
+        and AX
+        sta AX
+        .rega8
+        jmp MAINLOOP_END
+    j21_ax_cx:
+        .rega16
+        lda CX
+        and AX
+        sta AX
+        .rega8
+        jmp MAINLOOP_END
+    j21_ax_dx:
+        .rega16
+        lda DX
+        and AX
+        sta AX
+        .rega8
+        jmp MAINLOOP_END
+    j21_bx_ax:
+        .rega16
+        lda AX
+        and BX
+        sta BX
+        .rega8
+        jmp MAINLOOP_END
+    j21_bx_bx:
+        .rega16
+        lda BX
+        and BX
+        sta BX
+        .rega8
+        jmp MAINLOOP_END
+    j21_bx_cx:
+        .rega16
+        lda CX
+        and BX
+        sta BX
+        .rega8
+        jmp MAINLOOP_END
+    j21_bx_dx:
+        .rega16
+        lda DX
+        and BX
+        sta BX
+        .rega8
+        jmp MAINLOOP_END
+
+    j21_cmp2:
+        cmp #$d8
+        beq j21_cx_ax
+        cmp #$d8
+        beq j21_cx_bx
+        cmp #$d8
+        beq j21_cx_cx
+        cmp #$d8
+        beq j21_cx_dx
+        cmp #$d8
+        beq j21_dx_ax
+        cmp #$d8
+        beq j21_dx_bx
+        cmp #$d8
+        beq j21_dx_cx
+        cmp #$d8
+        beq j21_dx_dx
+        jmp MAINLOOP_END
+
+    j21_cx_ax:
+        .rega16
+        lda AX
+        and CX
+        sta CX
+        .rega8
+        jmp MAINLOOP_END
+    j21_cx_bx:
+        .rega16
+        lda BX
+        and CX
+        sta CX
+        .rega8
+        jmp MAINLOOP_END
+    j21_cx_cx:
+        .rega16
+        lda CX
+        and CX
+        sta CX
+        .rega8
+        jmp MAINLOOP_END
+    j21_cx_dx:
+        .rega16
+        lda DX
+        and CX
+        sta CX
+        .rega8
+        jmp MAINLOOP_END
+    j21_dx_ax:
+        .rega16
+        lda AX
+        and DX
+        sta DX
+        .rega8
+        jmp MAINLOOP_END
+    j21_dx_bx:
+        .rega16
+        lda BX
+        and DX
+        sta DX
+        .rega8
+        jmp MAINLOOP_END
+    j21_dx_cx:
+        .rega16
+        lda CX
+        and DX
+        sta DX
+        .rega8
+        jmp MAINLOOP_END
+    j21_dx_dx:
+        .rega16
+        lda DX
+        and DX
+        sta DX
+        .rega8
+        jmp MAINLOOP_END
+
 j22:
     jmp MAINLOOP_END
 j23:
@@ -296,10 +761,22 @@ j40:
     .rega8
     jmp MAINLOOP_END
 j41:
+    .setdatabank $00
+    .rega16
+    inc CX
+    .rega8
     jmp MAINLOOP_END
 j42:
+    .setdatabank $00
+    .rega16
+    inc DX
+    .rega8
     jmp MAINLOOP_END
 j43:
+    .setdatabank $00
+    .rega16
+    inc BX
+    .rega8
     jmp MAINLOOP_END
 j44:
     jmp MAINLOOP_END
@@ -325,37 +802,177 @@ j4e:
     jmp MAINLOOP_END
 j4f:
     jmp MAINLOOP_END
-j50:
+j50:                    ; push ax
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda AX
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
-j51:
+j51:                    ; push cx
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda CX
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
-j52:
+j52:                    ; push dx
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda DX
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
-j53:
+j53:                    ; push bx
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda BX
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
 j54:
     jmp MAINLOOP_END
-j55:
+j55:                    ; push bp
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda BP
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
-j56:
+j56:                    ; push si
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda SI
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
-j57:
+j57:                    ; push di
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda DI
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
-j58:
+j58:                    ; pop ax
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta AX
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
-j59:
+j59:                    ; pop cx
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta CX
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
-j5a:
+j5a:                    ; pop dx
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta DX
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
-j5b:
+j5b:                    ; pop bx
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta BX
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
 j5c:
     jmp MAINLOOP_END
-j5d:
+j5d:                    ; pop bp
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta BP
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
-j5e:
+j5e:                    ; pop si
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta SI
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
-j5f:
+j5f:                    ; pop di
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta DI
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
 j60:
     jmp MAINLOOP_END
@@ -439,8 +1056,139 @@ j87:
     jmp MAINLOOP_END
 j88:
     jmp MAINLOOP_END
-j89:
-    jmp MAINLOOP_END
+j89:                    ; mov regX, regX
+    jsr GETNEXT
+    cmp #$c0
+    bne +
+        .setdatabank $00
+        .rega16
+        lda AX
+        sta AX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$d8
+    bne +
+        .setdatabank $00
+        .rega16
+        lda BX
+        sta AX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$c8
+    bne +
+        .setdatabank $00
+        .rega16
+        lda CX
+        sta AX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$d0
+    bne +
+        .setdatabank $00
+        .rega16
+        lda DX
+        sta AX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$c3
+    bne +
+        .setdatabank $00
+        .rega16
+        lda AX
+        sta BX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$db
+    bne +
+        .setdatabank $00
+        .rega16
+        lda BX
+        sta BX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$cb
+    bne +
+        .setdatabank $00
+        .rega16
+        lda CX
+        sta BX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$d3
+    bne +
+        .setdatabank $00
+        .rega16
+        lda DX
+        sta BX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$c1
+    bne +
+        .setdatabank $00
+        .rega16
+        lda AX
+        sta CX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$d9
+    bne +
+        .setdatabank $00
+        .rega16
+        lda BX
+        sta CX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$c9
+    bne +
+        .setdatabank $00
+        .rega16
+        lda CX
+        sta CX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$d1
+    bne +
+        .setdatabank $00
+        .rega16
+        lda DX
+        sta CX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$c2
+    bne +
+        .setdatabank $00
+        .rega16
+        lda AX
+        sta DX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$da
+    bne +
+        .setdatabank $00
+        .rega16
+        lda BX
+        sta DX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$ca
+    bne +
+        .setdatabank $00
+        .rega16
+        lda CX
+        sta DX
+        .rega8
+        jmp MAINLOOP_END
++   cmp #$d2
+    bne +
+        .setdatabank $00
+        .rega16
+        lda DX
+        sta DX
+        .rega8
+        jmp MAINLOOP_END
++    jmp MAINLOOP_END
+      
+
 j8a:
     jmp MAINLOOP_END
 j8b:
@@ -453,7 +1201,7 @@ j8e:
     jmp MAINLOOP_END
 j8f:
     jmp MAINLOOP_END
-j90:
+j90:                    ; nop
     jmp MAINLOOP_END
 j91:
     jmp MAINLOOP_END
@@ -477,13 +1225,39 @@ j9a:
     jmp MAINLOOP_END
 j9b:
     jmp MAINLOOP_END
-j9c:
+j9c:                    ; pushf
+    .setdatabank $00
+    .rega16
+    lda SP
+    sec
+    sbc #$02
+    sta SP
+    lda FR
+    .setdatabank16 $02
+    sta (SP)
+    .rega8
     jmp MAINLOOP_END
-j9d:
+j9d:                    ; popf
+    .rega16
+    .setdatabank16 $02
+    lda (SP)
+    .setdatabank16 $00
+    sta FR
+    lda SP
+    clc
+    adc #$02
+    sta SP
+    .rega8
     jmp MAINLOOP_END
-j9e:
+j9e:                    ; sahf
+    .setdatabank $00
+    lda AH
+    sta FRL
     jmp MAINLOOP_END
-j9f:
+j9f:                    ; lahf
+    .setdatabank $00
+    sta FRL
+    lda AH
     jmp MAINLOOP_END
 ja0:
     jmp MAINLOOP_END
@@ -517,37 +1291,77 @@ jae:
     jmp MAINLOOP_END
 jaf:
     jmp MAINLOOP_END
-jb0:
+jb0:                        ; MOV al,01
+    jsr GETNEXT
+    .setdatabank $00
+    sta AL
     jmp MAINLOOP_END
-jb1:
+jb1:                        ; MOV cl,01
+    jsr GETNEXT
+    .setdatabank $00
+    sta CL
     jmp MAINLOOP_END
-jb2:
-    jsr INC_IP
-    jsr FETCH_IP
+jb2:                        ; MOV dl,01
+    jsr GETNEXT
     .setdatabank $00
     sta DL      ; store it
     jmp MAINLOOP_END
-jb3:
+jb3:                        ; MOV bl,01
+    jsr GETNEXT
+    .setdatabank $00
+    sta BL
     jmp MAINLOOP_END
-jb4:
-    jsr INC_IP
-    jsr FETCH_IP
+jb4:                        ; MOV ah,01
+    jsr GETNEXT
     .setdatabank $00
     sta AH      ; store it
     jmp MAINLOOP_END
-jb5:
+jb5:                        ; MOV ch,01
+    jsr GETNEXT
+    .setdatabank $00
+    sta CH
     jmp MAINLOOP_END
-jb6:
+jb6:                        ; MOV dh,01
+    jsr GETNEXT
+    .setdatabank $00
+    sta DH
     jmp MAINLOOP_END
-jb7:
+jb7:                        ; MOV bh,01
+    jsr GETNEXT
+    .setdatabank $00
+    sta BH
     jmp MAINLOOP_END
-jb8:
+jb8:                        ; mov AX, 0001
+    jsr GETNEXT
+    .setdatabank $00
+    sta AL
+    jsr GETNEXT
+    .setdatabank $00
+    sta AH
     jmp MAINLOOP_END
-jb9:
+jb9:                        ; mov CX, 0001
+    jsr GETNEXT
+    .setdatabank $00
+    sta CL
+    jsr GETNEXT
+    .setdatabank $00
+    sta CH
     jmp MAINLOOP_END
-jba:
+jba:                        ; mov DX, 0001
+    jsr GETNEXT
+    .setdatabank $00
+    sta DL
+    jsr GETNEXT
+    .setdatabank $00
+    sta DH
     jmp MAINLOOP_END
-jbb:
+jbb:                        ; mov BX, 0001
+    jsr GETNEXT
+    .setdatabank $00
+    sta BL
+    jsr GETNEXT
+    .setdatabank $00
+    sta BH
     jmp MAINLOOP_END
 jbc:
     jmp MAINLOOP_END
@@ -584,8 +1398,7 @@ jcb:
 jcc:
     jmp MAINLOOP_END
 jcd:
-    jsr INC_IP
-    jsr FETCH_IP
+    jsr GETNEXT
     cmp #$21
     beq jcd_putc
     cmp #$20
@@ -594,7 +1407,22 @@ jcd:
 
     jcd_putc:
         .setdatabank $00
-        lda DL
+        lda AH
+        cmp #$09
+        bne +
+            ldy #$00
+            pr_string_loop:
+                .setdatabank $02
+                lda (DX),y
+                cmp #'$'
+                beq pr_string_done
+                .setdatabank $00
+                jsr $FFD2
+                iny
+                jmp pr_string_loop
+            pr_string_done:
+                jmp MAINLOOP_END
++       lda DL
         jsr $FFD2
         jmp MAINLOOP_END
     jcd_exit:
@@ -640,7 +1468,40 @@ je0:
 je1:
     jmp MAINLOOP_END
 je2:
-    jmp MAINLOOP_END
+    jsr GETNEXT
+    pha
+    .setdatabank $00
+    .rega16
+    lda CX
+    beq je2_loopdone
+    dec CX
+    .rega8
+    pla
+    cmp #$80
+    bcs je2_back
+    je2_forward:
+        sta TMP1
+        .rega16
+        lda IP
+        clc
+        adc TMP1
+        sta IP
+        .rega8
+        jmp MAINLOOP
+    je2_back:
+        eor #$ff
+        sta TMP1
+        .rega16
+        lda IP
+        sec
+        sbc TMP1
+        sta IP
+        .rega8
+        jmp MAINLOOP
+    je2_loopdone:
+        .rega8
+        pla
+        jmp MAINLOOP
 je3:
     jmp MAINLOOP_END
 je4:
@@ -658,8 +1519,7 @@ je9:
 jea:
     jmp MAINLOOP_END
 jeb:
-    jsr INC_IP
-    jsr FETCH_IP
+    jsr GETNEXT
     .setdatabank $00
     cmp #$80
     bcs jeb_back
@@ -690,7 +1550,7 @@ jee:
     jmp MAINLOOP_END
 jef:
     jmp MAINLOOP_END
-jf0:
+jf0:                    ; lock
     jmp MAINLOOP_END
 jf1:
     jmp MAINLOOP_END
@@ -698,8 +1558,8 @@ jf2:
     jmp MAINLOOP_END
 jf3:
     jmp MAINLOOP_END
-jf4:
-    jmp MAINLOOP_END
+jf4:                    ; hlt
+    jmp jf4
 jf5:
     jmp MAINLOOP_END
 jf6:
@@ -719,12 +1579,23 @@ jfc:
 jfd:
     jmp MAINLOOP_END
 jfe:
-    jsr INC_IP
-    jsr FETCH_IP
+    jsr GETNEXT
     cmp #$c0
     beq jfe_al
     cmp #$c4
     beq jfe_ah
+    cmp #$c3
+    beq jfe_bl
+    cmp #$c7
+    beq jfe_bh
+    cmp #$c1
+    beq jfe_cl
+    cmp #$c5
+    beq jfe_ch
+    cmp #$c2
+    beq jfe_dl
+    cmp #$c6
+    beq jfe_dh
     jmp MAINLOOP_END
 
     jfe_al:
@@ -734,6 +1605,30 @@ jfe:
     jfe_ah:
         .setdatabank $00
         inc AH
+        jmp MAINLOOP_END
+    jfe_bl:
+        .setdatabank $00
+        inc BL
+        jmp MAINLOOP_END
+    jfe_bh:
+        .setdatabank $00
+        inc BH
+        jmp MAINLOOP_END
+    jfe_cl:
+        .setdatabank $00
+        inc CL
+        jmp MAINLOOP_END
+    jfe_ch:
+        .setdatabank $00
+        inc CH
+        jmp MAINLOOP_END
+    jfe_dl:
+        .setdatabank $00
+        inc DL
+        jmp MAINLOOP_END
+    jfe_dh:
+        .setdatabank $00
+        inc DH
         jmp MAINLOOP_END
 jff:
     jmp MAINLOOP_END
