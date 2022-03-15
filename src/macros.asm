@@ -20,6 +20,16 @@ setdatabank     .macro  bank
                 pla
                 .endm
 
+setdatabank16   .macro  bank
+                pha
+                .rega8
+                lda #\bank
+                pha                     ; push the value to the stack
+                plb                     ; pull value from stack to data bank register
+                .rega16
+                pla
+                .endm
+
 rega8          .macro                  ; Make accumulator 8-bits
                 SEP #$20
                 .as
