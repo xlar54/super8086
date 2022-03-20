@@ -600,13 +600,13 @@ sflag:
 
 pflag:
     php
-pflag_loop2:
+pflag_loop:
     lsr
-    beq pflag_done2
-    bcc pflag_loop2
+    beq pflag_done
+    bcc pflag_loop
     eor #$01
-    jmp pflag_loop2
-pflag_done2:
+    jmp pflag_loop
+pflag_done:
     bcs +
     lda FRL             ; get the 8086 register flag
     ora #$04            ; set bit 4
@@ -618,41 +618,6 @@ pflag_done2:
     sta FRL             ; store it
     plp
     rts
-
-pflag2:
-    php                 ; save status reg
-    tax                 ; accumulator holds value of last calculation
-    stz pflag_tmp       ; clear the temp value holder
-    txa
-    pha                 ; save accumulator for exit
-    ldy #$08            ; we are going to loop through each bit
-pflag_loop:
-    clc                 ; clear the carry
-    rol                 ; roll the bits left, putting leftmost in carry flg
-    bcc +               ; if carry is clear, this bit should be skipped
-    inc pflag_tmp       ; otherwise, temp value = temp value + 1
-+   dey                 ; count down
-    beq pflag_clrset    ; if zero, move on
-    jmp pflag_loop      ; loop and roll next bit
-pflag_clrset:
-    lda pflag_tmp       ; get the temp value (number of bits with 1's in them)
-    and #$01            ; is the 0th bit = 1?  (if so, its an odd number)
-    bne pflag_clr       ; its an even number - skip ahead
-    lda FRL             ; get the 8086 register flag
-    ora #$04            ; set bit 4
-    sta FRL             ; store it
-    jmp pflag_done      ; we are done
-pflag_clr:
-    lda FRL             ; its an off number. get the 8086 register flag
-    and #$fb            ; clear bit 4
-    sta FRL             ; store it
-pflag_done:
-    pla                 ; get our original A value
-    plp                 ; get original status reg
-    rts                 ; done
-pflag_tmp:
-.byte $00
-
 
 
 ; -------------------------------------------------------
