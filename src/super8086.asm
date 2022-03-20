@@ -95,7 +95,7 @@ start:
     sta IP
  
     ; set stack to $FFFF
-    lda #$FFFF
+    lda #$FFFE
     sta SP
     .regaxy8
 
@@ -112,12 +112,10 @@ LOAD:
     jmp LOAD
 
 X86PRG:
-    .byte $ba, $09, $01 ; mov dX, 0109
-    .byte $52
-    .byte $b4, $09      ; mov ah, 09
-    .byte $cd, $21      ; int 21
-    .byte $59
-    .byte $cd, $20      ; int 20
+    .byte $b0, $01
+    .byte $b3, $00
+    .byte $00, $d8
+    .byte $cd, $20
     .text "hello world$"
     .byte $cd, $20      ; int 21
     .byte $fe, $c2      ; inc DL
@@ -290,11 +288,131 @@ EXIT:
     lda #>txt_fr
     sta $ff
     jsr print
-    lda FR
+    lda FRH
     jsr prhex
-    lda FR+2
+    lda FRL
     jsr prhex
-
+fl_ovnv
+    lda FRH
+    and #$08
+    beq +
+    lda #<txt_fr_ov      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_ov
+    sta $ff
+    jsr print
+    jmp fl_updn
++   lda #<txt_fr_nv      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_nv
+    sta $ff
+    jsr print 
+fl_updn  
+    lda FRH
+    and #$04
+    beq +
+    lda #<txt_fr_dn      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_dn
+    sta $ff
+    jsr print
+    jmp fl_eidi
++   lda #<txt_fr_up      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_up
+    sta $ff
+    jsr print   
+fl_eidi 
+    lda FRH
+    and #$02
+    beq +
+    lda #<txt_fr_ei      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_ei
+    sta $ff
+    jsr print
+    jmp fl_plng
++   lda #<txt_fr_di      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_di
+    sta $ff
+    jsr print  
+fl_plng
+    lda FRL
+    and #$80
+    beq +
+    lda #<txt_fr_ng      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_ng
+    sta $ff
+    jsr print
+    jmp fl_zrnz
++   lda #<txt_fr_pl      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_pl
+    sta $ff
+    jsr print  
+fl_zrnz
+    lda FRL
+    and #$40
+    beq +
+    lda #<txt_fr_zr      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_zr
+    sta $ff
+    jsr print
+    jmp fl_acna
++   lda #<txt_fr_nz      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_nz
+    sta $ff
+    jsr print 
+fl_acna
+    lda FRL
+    and #$10
+    beq +
+    lda #<txt_fr_ac      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_ac
+    sta $ff
+    jsr print
+    jmp fl_pepo
++   lda #<txt_fr_na      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_na
+    sta $ff
+    jsr print 
+fl_pepo
+    lda FRL
+    and #$04
+    beq +
+    lda #<txt_fr_pe      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_pe
+    sta $ff
+    jsr print
+    jmp fl_cync
++   lda #<txt_fr_po      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_po
+    sta $ff
+    jsr print 
+fl_cync
+    lda FRL
+    and #$01
+    beq +
+    lda #<txt_fr_cy      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_cy
+    sta $ff
+    jsr print
+    jmp fl_done
++   lda #<txt_fr_nc      ; print the startup message
+    sta $fe 
+    lda #>txt_fr_nc
+    sta $ff
+    jsr print 
+fl_done
     .emulation
     rts
 
@@ -339,6 +457,7 @@ prhex
         txa                 ; transfer lower to a
         plx                 ; restore x
         jsr $ffd2          ; output lower nybble
+        rts
 
 ; -----------------------------------------------------------------------------
 ; convert byte in a to hex digits
@@ -346,10 +465,10 @@ asctwo  pha                 ; save byte
         jsr ascii           ; do low nybble
         tax                 ; save in x
         pla                 ; restore byte
-        lsr a               ; shift upper nybble down
-        lsr a
-        lsr a
-        lsr a
+        lsr                 ; shift upper nybble down
+        lsr  
+        lsr  
+        lsr 
 
 ; convert low nybble in A to hex digit
 ascii   and #$0f            ; clear upper nibble
@@ -391,11 +510,225 @@ txt_ip:
 txt_fr:
     .text "flags=",$00
 
+txt_fr_ov:
+    .text $0d,"OV ",$00
+txt_fr_nv:
+    .text $0d,"NV ",$00
+
+txt_fr_up:
+    .text "UP ",$00
+txt_fr_dn:
+    .text "DN ",$00
+
+txt_fr_ei:
+    .text "EI ",$00
+txt_fr_di:
+    .text "DI ",$00
+
+txt_fr_ng:
+    .text "NG ",$00
+txt_fr_pl:
+    .text "PL ",$00
+
+txt_fr_zr:
+    .text "ZR ",$00
+txt_fr_nz:
+    .text "NZ ",$00
+
+txt_fr_ac:
+    .text "AC ",$00
+txt_fr_na:
+    .text "NA ",$00
+
+txt_fr_pe:
+    .text "PE ",$00
+txt_fr_po:
+    .text "PO ",$00
+
+txt_fr_cy:
+    .text "CY ",$00
+txt_fr_nc:
+    .text "NC ",$00
+
+
+
+; -------------------------------------------------------
+; flag sets and clears
+; -------------------------------------------------------
+cflag:
+    php
+    bcc +
+    lda FRL
+    ora #$01
+    sta FRL
+    plp
+    rts
++   lda FRL
+    and #$fe
+    sta FRL
+    plp
+    rts
+
+zflag:
+    php
+    bne +
+    lda FRL
+    ora #$40
+    sta FRL
+    plp
+    rts
++   lda FRL
+    and #$bf
+    sta FRL
+    plp
+    rts
+
+sflag:
+    php
+    cmp #$80
+    bcc +
+    lda FRL
+    and #$7f
+    sta FRL
+    plp
+    rts
++   lda FRL
+    ora #$80
+    sta FRL
+    plp
+    rts
+
+pflag:
+    php
+pflag_loop2:
+    lsr
+    beq pflag_done2
+    bcc pflag_loop2
+    eor #$01
+    jmp pflag_loop2
+pflag_done2:
+    bcs +
+    lda FRL             ; get the 8086 register flag
+    ora #$04            ; set bit 4
+    sta FRL             ; store it
+    plp
+    rts
++   lda FRL             ; its an off number. get the 8086 register flag
+    and #$fb            ; clear bit 4
+    sta FRL             ; store it
+    plp
+    rts
+
+pflag2:
+    php                 ; save status reg
+    tax                 ; accumulator holds value of last calculation
+    stz pflag_tmp       ; clear the temp value holder
+    txa
+    pha                 ; save accumulator for exit
+    ldy #$08            ; we are going to loop through each bit
+pflag_loop:
+    clc                 ; clear the carry
+    rol                 ; roll the bits left, putting leftmost in carry flg
+    bcc +               ; if carry is clear, this bit should be skipped
+    inc pflag_tmp       ; otherwise, temp value = temp value + 1
++   dey                 ; count down
+    beq pflag_clrset    ; if zero, move on
+    jmp pflag_loop      ; loop and roll next bit
+pflag_clrset:
+    lda pflag_tmp       ; get the temp value (number of bits with 1's in them)
+    and #$01            ; is the 0th bit = 1?  (if so, its an odd number)
+    bne pflag_clr       ; its an even number - skip ahead
+    lda FRL             ; get the 8086 register flag
+    ora #$04            ; set bit 4
+    sta FRL             ; store it
+    jmp pflag_done      ; we are done
+pflag_clr:
+    lda FRL             ; its an off number. get the 8086 register flag
+    and #$fb            ; clear bit 4
+    sta FRL             ; store it
+pflag_done:
+    pla                 ; get our original A value
+    plp                 ; get original status reg
+    rts                 ; done
+pflag_tmp:
+.byte $00
+
+
+
 ; -------------------------------------------------------
 ; opcode operations
 ; -------------------------------------------------------
-j00:
+j00:                    ; add reg, reg
+    jsr GETNEXT
+    .setdatabank $00
+    cmp #$c0            ; add al,al
+    bne +
+    lda AL
+    clc
+    adc AL
+    sta AL
+    jsr cflag
     jmp MAINLOOP_END
++   cmp #$d8            ; add al, bl
+    bne +
+    lda BL
+    clc
+    adc AL
+    sta AL
+    jsr pflag
+    jsr cflag
+    jsr sflag
+    jsr zflag
+    jmp MAINLOOP_END
++   cmp #$c8
+    bne +
+    lda CL
+    clc
+    adc AL
+    sta AL
+    jsr cflag
+    jmp MAINLOOP_END
++   cmp #$d0
+    bne +
+    lda DL
+    clc
+    adc AL
+    sta AL
+    jsr cflag
+    jmp MAINLOOP_END
++   cmp #$c4
+    bne +
+    lda AL
+    clc
+    adc AH
+    sta AH
+    jsr cflag
+    jmp MAINLOOP_END
++   cmp #$dc
+    bne +
+    lda BL
+    clc
+    adc AH
+    sta AH
+    jsr cflag
+    jmp MAINLOOP_END
++   cmp #$cc
+    bne +
+    lda CL
+    clc
+    adc AH
+    sta AH
+    jsr cflag
+    jmp MAINLOOP_END
++   cmp #$d4
+    bne +
+    lda DL
+    clc
+    adc AH
+    sta AH
+    jsr cflag
++   jmp MAINLOOP_END
+    
 j01:
     jmp MAINLOOP_END
 j02:
@@ -1020,7 +1353,32 @@ j75:
     jmp MAINLOOP_END
 j76:
     jmp MAINLOOP_END
-j77:
+j77:                    ; ja 0150
+    ; compare if above
+    jsr GETNEXT
+    cmp #$80
+    bcs j77_back
+    j77_forward:
+        sta TMP1
+        .rega16
+        lda IP
+        clc
+        adc TMP1
+        sta IP
+        .rega8
+        jmp MAINLOOP
+    j77_back:
+        eor #$ff
+        sta TMP1
+        .rega16
+        lda IP
+        sec
+        sbc TMP1
+        sta IP
+        .rega8
+        jmp MAINLOOP
+    .setdatabank $00
+    a 
     jmp MAINLOOP_END
 j78:
     jmp MAINLOOP_END
@@ -1578,7 +1936,7 @@ jfc:
     jmp MAINLOOP_END
 jfd:
     jmp MAINLOOP_END
-jfe:
+jfe:                    ; INC reg
     jsr GETNEXT
     cmp #$c0
     beq jfe_al
